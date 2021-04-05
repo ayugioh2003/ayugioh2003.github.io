@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="小麥前端 blog">
+<meta property="og:url" content="https://ayugioh2003.github.io/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="frontend, vue, psychology">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    const adSidebar = document.querySelector('.ad-sidebar')
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2021/04/restart-hexo-blog-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/restart-hexo-blog-2021/" class="post-title-link" itemprop="url">在 2021 年重拾 hexo 部落格</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-04-04 02:26:59" itemprop="dateCreated datePublished" datetime="2021-04-04T02:26:59+00:00">2021-04-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/04/restart-hexo-blog-2021/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/restart-hexo-blog-2021/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前幾天因為六角學院舉辦了徵文比賽，為了有個文章的網址可以投稿，我重新開啟了這個佈滿灰塵的 hexo 部落格。不過，因為重啟過程中，遇到了一些障礙，而且 hexo 好像已經有 hexo 5 版本了，我想說那就花點時間來升級吧。本文簡單記錄一下我為了升級處理的東西。</p>
+<p>主要參考資料是 Ray 的 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20119486/ironman/2944">試著學 Hexo :: 第 12 屆 iT 邦幫忙鐵人賽</a> 系列。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/restart-hexo-blog-2021/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2021/03/hexo-deploy-fail-at-node14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/hexo-deploy-fail-at-node14/" class="post-title-link" itemprop="url">hexo deploy 失敗，版本 node14，訊息：The "mode" argument must be integer…</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-03-31 23:55:45" itemprop="dateCreated datePublished" datetime="2021-03-31T23:55:45+00:00">2021-03-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/hexo-deploy-fail-at-node14/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/hexo-deploy-fail-at-node14/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近為了徵文活動，想重新啟用 hexo 部落格。結果發現使用 <code>hexo deploy</code> 指令時出錯了 orz。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>使用錯誤訊息關鍵字找了一下，好像是 hexo-cli 2.0.0 不支援 node14+ 的樣子。悲劇。</p>
+<p>文章提供了兩個解決方案</p>
+<ol>
+<li>降低 node 版本</li>
+<li>升級到 <a href="mailto:&#x68;&#101;&#120;&#x6f;&#x40;&#52;&#x2e;&#50;&#46;&#x31;">&#x68;&#101;&#120;&#x6f;&#x40;&#52;&#x2e;&#50;&#46;&#x31;</a>+</li>
+</ol>
+<p>因為我的新筆電有安裝 nvm，切換 node 環境很方便，我就採用方案一，將 node 版本切換到穩定板 node 12 了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use 12.18.3</span><br></pre></td></tr></table></figure>
+
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>覺得自己除錯的功力有一點進步了呢。想當初第一次用 hexo 時，完全看不懂該怎麼用，現在竟然一個指令就能解決錯誤訊息了，真是令人感慨呢（？）。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://evestorm.github.io/posts/430/">node14+版本下hexo部署失败 | EVE | 暴风雨前夕</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.google.com/search?q=TypeError+%5BERR_INVALID_ARG_TYPE%5D:+The+%22mode%22+argument+must+be+integer.+Received+an+instance+of+Object&rlz=1C1CHBF_zh-TWTW911TW911&oq=TypeError+%5BERR_INVALID_ARG_TYPE%5D:+The+%22mode%22+argument+must+be+integer.+Received+an+instance+of+Object&aqs=chrome..69i57.590j0j7&sourceid=chrome&ie=UTF-8">TypeError [ERR_INVALID_ARG_TYPE]: The “mode” argument must be integer. Received an instance of Object - Google 搜尋</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2021/03/frontend-interview-perparation-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/frontend-interview-perparation-2021/" class="post-title-link" itemprop="url">前端面試準備 2021</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-03-31 22:05:45" itemprop="dateCreated datePublished" datetime="2021-03-31T22:05:45+00:00">2021-03-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/frontend-interview-perparation-2021/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/frontend-interview-perparation-2021/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="前端面試準備-2021"><a href="#前端面試準備-2021" class="headerlink" title="前端面試準備 2021"></a>前端面試準備 2021</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我目前已經以前端工程師的身份工作一年了，但我其實還沒面試過。在目前的案子結束後，預計想找個在公司上班的正職工作。以下是我規劃的前端面試準備。</p>
+<h2 id="一、前端生涯規劃"><a href="#一、前端生涯規劃" class="headerlink" title="一、前端生涯規劃"></a>一、前端生涯規劃</h2><p><img src="https://i.imgur.com/2V7QvMA.jpg"></p>
+<p>在深入面試細節之前，我會希望先站在高處鳥瞰全局。因此，每個面試行動，應該會是整個生涯規劃的一部分。</p>
+<p>我自己有針對此開了一個 notion 文件，從學習面、求職面、成長面、職涯面做整理，讓自己的每一步都盡量被記錄下來。</p>
+<p>另外也可以參考六角的這篇文章：<a target="_blank" rel="noopener" href="https://www.hexschool.com/qa/how-to.html">邁向前端工程師 / 設計師之路 | 六角學院</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/frontend-interview-perparation-2021/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2021/03/frontend-case-2019-to-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/frontend-case-2019-to-2021/" class="post-title-link" itemprop="url">前端接案開發流程與心得 2019-2021</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-03-31 21:05:45" itemprop="dateCreated datePublished" datetime="2021-03-31T21:05:45+00:00">2021-03-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/frontend-case-2019-to-2021/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/frontend-case-2019-to-2021/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>因為剛好六角有徵文活動，想說順便整理一下這陣子以來接案的開發流程與心得。</p>
+<h2 id="目前參與過的專案"><a href="#目前參與過的專案" class="headerlink" title="目前參與過的專案"></a>目前參與過的專案</h2><p>我從 2019 年的 10 月左右開始接案，到目前為止經手過三個案子。第一個案子是幫國外公司建立形象官網(從頭到尾參與)、第二個案子是幫一個國內公司後台畫面切板(只參與前半部)、第三個案子則是進行到一半的案子，在既有架構上幫忙增加新頁面或功能(從中間開始參與)。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/frontend-case-2019-to-2021/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/07/about-big-five-personality-traits/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/about-big-five-personality-traits/" class="post-title-link" itemprop="url">關於心理測驗〈五大性格特質〉</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-07-02 13:29:02" itemprop="dateCreated datePublished" datetime="2020-07-02T13:29:02+00:00">2020-07-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/psychology/" itemprop="url" rel="index"><span itemprop="name">psychology</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/07/about-big-five-personality-traits/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/about-big-five-personality-traits/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="https://i.imgur.com/bKonbmO.png" alt="我的英雄學院三巨頭 Big Three，用來當作 Big Five 的示意圖"></p>
+<blockquote>
+<p>J 個是 Big Three，不是 Big Five</p>
+</blockquote>
+<p>最近幫忙做了一份簡版的心理測驗，想說來做個介紹</p>
+<p>先發布出來佔個坑，之後慢慢補上文章內容</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/about-big-five-personality-traits/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/03/detect-scrolling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/detect-scrolling/" class="post-title-link" itemprop="url">偵測網頁滾動或元素是否進入到畫面</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-25 16:38:44" itemprop="dateCreated datePublished" datetime="2020-03-25T16:38:44+00:00">2020-03-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/03/detect-scrolling/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/detect-scrolling/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前面幾週提到，當初開發專案時，用碰到視差滾動、或是滾動到某一元素時，就啟動某一個動畫效果。這邊整理一下如何偵測滾動、或是如何偵測元素是否進到畫面。</p>
+<p>目前我知道有兩種方式：scroll 事件與 Intersection Observer 這個 Web API。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/detect-scrolling/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/03/background-video/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/background-video/" class="post-title-link" itemprop="url">在網頁放影片，自動重複播放且靜音</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-17 16:03:32" itemprop="dateCreated datePublished" datetime="2020-03-17T16:03:32+00:00">2020-03-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/03/background-video/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/background-video/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在先前專案開發時，遇到一個需求是，想在 banner 地方放上一個滿版的重複自動播放影片，播放時不要有聲音。因為之前沒什麼在網頁中放影片的經驗，就研究了一下。</p>
+<h2 id="如何達成放上影片的需求"><a href="#如何達成放上影片的需求" class="headerlink" title="如何達成放上影片的需求"></a>如何達成放上影片的需求</h2><p>以下是在參考一些文章後整理出的方法</p>
+<ol>
+<li>用 <code>&lt;video&gt;</code> tag 引入影片，就像是使用 <code>&lt;img&gt;</code> 引入圖片一樣</li>
+<li>在 <code>&lt;video&gt;</code> 添加 autoplay, muted, loop 等屬性，達到自動播放、靜音、循環播放效果</li>
+<li>用 CSS 設定將影片滿版</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span> <span class="attr">muted</span> <span class="attr">loop</span> <span class="attr">id</span>=<span class="string">&quot;myVideo&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;rain.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">#myVideo &#123;</span><br><span class="line"><span class="css">  <span class="attribute">position</span>: fixed;</span></span><br><span class="line"><span class="css">  <span class="attribute">right</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">  <span class="attribute">min-width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="潛在需求"><a href="#潛在需求" class="headerlink" title="潛在需求"></a>潛在需求</h2><p>當時查完資料後，沒有多久完成了符合需求的程式碼。但現在想想，覺得影片播放可能還有一些潛在需求。簡單記錄一下</p>
+<ol>
+<li>流量問題。這次專案影片大小沒很大，所以直接跟網頁檔案放在一起。但感覺放在 Youtbube、vimeo、或專用伺服器可能會更好？</li>
+<li>不同版型的影片。專案時有將影片分成桌機版和手機版影片，我是先在網頁擺兩個 <code>&lt;video&gt;</code> 分別引入桌機版和手機版影片，當使用者使用桌機時則顯示桌機版的影片，使用手機時則顯示手機版影片。不過我不確定這是不是最佳解就是了。</li>
+<li>影片的格式。後來把網頁丟去測速時，被建議說換成 webm 格式會更好。這點可能也是要注意的地方。</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3schools.com/howto/howto_css_fullscreen_video.asp">How To Create a Fullscreen Video Background</a></li>
+<li><a target="_blank" rel="noopener" href="https://css-tricks.com/should-i-use-a-video-as-a-background/">Should I use a video as a background? | CSS-Tricks</a></li>
+<li><a target="_blank" rel="noopener" href="https://web.dev/video-basics/">Going beyond images with basic video for the web</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.barkweb.co.uk/blog/how-we-added-a-video-background-to-our-home-page">How we add a video background to our home page</a></li>
+<li><a target="_blank" rel="noopener" href="https://caniuse.com/#search=video">Can I use… Support tables for HTML5, CSS3, etc</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/31380695/how-to-open-mov-format-video-in-html-video-tag">html5 - How to open .mov format video in HTML video Tag? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://stock.adobe.com/tw/search/video?filters%5Bcontent_type:video%5D=1&order=relevance&safe_search=1&search_page=2&search_type=pagination&acp=&aco=walking+dog&limit=100&k=walking+dog&get_facets=0&asset_id=293514354">Walking dog stock photos, royalty-free images, vectors, video</a></li>
+<li>ffmpeg, mov, mp4, webm</li>
+</ul>
+<p>套件</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://originalexe.github.io/vidim/">Vidim - Easy background videos</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/jquery-youtube-background">jquery-youtube-background - npm</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pupunzi/jquery.mb.YTPlayer">pupunzi/jquery.mb.YTPlayer: use a custom yutube player for a video as background on jQuery framework</a><ul>
+<li><a target="_blank" rel="noopener" href="https://designmodo.com/video-background-website/">How to Build a YouTube Video Website Background - Designmodo</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/03/parallax-scrolling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/parallax-scrolling/" class="post-title-link" itemprop="url">簡單的視差滾動</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-10 14:38:46" itemprop="dateCreated datePublished" datetime="2020-03-10T14:38:46+00:00">2020-03-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/03/parallax-scrolling/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/parallax-scrolling/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="https://i.imgur.com/thSI12p.png" alt="視差滾動示意圖"></p>
+<p>在專案開始前，覺得有可能會碰到視差滾動的需求，就先複習了一下。後來雖然有用到一下，但因為需求變更，後來在專案中就把視差滾動效果拿掉了。這邊記錄一下視差滾動的東西。</p>
+<h2 id="視差滾動是什麼、它的用處？"><a href="#視差滾動是什麼、它的用處？" class="headerlink" title="視差滾動是什麼、它的用處？"></a>視差滾動是什麼、它的用處？</h2><p>視差滾動就是，讓平面的疊加影像，產生出有層次的移動速率不同的感覺。以現實生活的情境為例，當我們坐在火車上看窗外時，會覺得遠方的景物移動的較慢，近方的景物移動的較快。</p>
+<p>視差滾動有什麼好處呢？許多的網頁資訊，都是像貼紙一樣直接擺在畫面上。採用視差滾動效果後，除了會讓人有新鮮的感覺，有時也能突顯出背景與前景的差異。</p>
+<h2 id="在網頁實現視差滾動"><a href="#在網頁實現視差滾動" class="headerlink" title="在網頁實現視差滾動"></a>在網頁實現視差滾動</h2><p>前述提到，視差滾動原理其實就是讓背景和前景的移動速度不同。當時做研究時，大概整理出兩種用原生 CSS、JavaScript 做視差滾動的方式：</p>
+<p>一、純 CSS 方案</p>
+<p>要簡單快速的實現視差滾動效果，可以用這個純 CSS 方案嚐鮮。</p>
+<p>在 CSS 中，有一個屬性是 <code>background-attachment</code>，這屬性用來設定，背景圖片的是要固定在 viewport （視圖，瀏覽器視窗畫面）上，還是背景圖片的 containing block （父層容器）上。</p>
+<p>當裝著背景圖的容器元素添加了 <code>background-attachment: fixed;</code> 設定後，背景圖會被固定在 viewport 上。也就是說，當使用者滾動網頁時，背景的移動速度會是零，前景(網頁內容)的移動速度是一般的滾動速度，因此達到視差滾動的效果。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/background-attachment">background-attachment - CSS | MDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10197613">簡單的視差滾動 - iT 邦幫忙：：一起幫忙解決難題，拯救 IT 人的一天</a></li>
+<li><a target="_blank" rel="noopener" href="https://wcc723.github.io/css/2013/09/25/background-att/">CSS沒有極限 - 意想不到的background-attachment | 卡斯伯 Blog - 前端，沒有極限</a></li>
+</ul>
+<p>二、混合 JavaScript 方案</p>
+<p>雖然前面提到的 CSS 方案可以實現簡單視差滾動效果，但當畫面由多個背景圖疊加，想產生多層次感的視差滾動時，純 CSS 方案就不夠用了。例如，有一個畫面由高山、矮山、人物組成。網頁設計師希望讓使用者滾動網頁時，看到遠景的高山移動很慢、中景的矮山移動稍快，近景的人物移動較快。</p>
+<p>而原生 JavaScript 實現視差滾動的觀念是</p>
+<ol>
+<li>抓取需要在視差滾動時移動的圖片元素、並得知目前它們在網頁上 Y 軸方向的座標</li>
+<li>監測到使用者讓網頁滾動時，執行一些事情</li>
+</ol>
+<ul>
+<li>遠景圖片讓他移動距離增加少一點</li>
+<li>中景圖片移動距離普通</li>
+<li>近景圖片移動距離多一點</li>
+</ul>
+<p>抓取元素在網頁上的座標有一些 JavaScript API 可以用</p>
+<ol>
+<li><code>getBoundingClientRect</code>、<code>getClientRects</code> 系列</li>
+<li><code>offsetTop</code>、<code>scrollTop</code>、<code>clientTop</code> 系列做運算</li>
+</ol>
+<p>當圖片位置進入到瀏覽器視窗畫面中時，有這些 JavaScript API 能讓圖片開始移動。不過我只試過第一種，第二種還沒試過。第一種寫法雖比較簡單，但會消耗性能，因為每次使用者滾動時都會觸發這個函式。</p>
+<ol>
+<li><code>onScroll</code></li>
+<li><code>IntersectionObserver</code></li>
+</ol>
+<p>其他好像還有不少種方式，但先前我研究比較通用的方式就是這兩種了。</p>
+<h2 id="相關資料"><a href="#相關資料" class="headerlink" title="相關資料"></a>相關資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/8ss1-w5sQeyac50zFLUj4A?view">視差滾動研究 - HackMD</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ayugioh2003/parallax-scrolling-exercise">ayugioh2003/parallax-scrolling-exercise: 視差滾動練習</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/03/css-animation-text-wipe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/css-animation-text-wipe/" class="post-title-link" itemprop="url">CSS 的文字抹除效果</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-05 19:19:54" itemprop="dateCreated datePublished" datetime="2020-03-05T19:19:54+00:00">2020-03-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/03/css-animation-text-wipe/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/css-animation-text-wipe/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在接專案時遇到了不少動畫的需求，其中一個比較抽象，是關於文字出現時的動畫效果。我用兩種方式比喻。（一）就像是打字時文字慢慢出現，但不是突然地，而是平滑地由左往右浮現（二）就像是拿橡皮擦由右往左擦時文字消失，然後把這段影像往回播放的樣子</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/css-animation-text-wipe/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/02/pop-window-and-background-fixed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/02/pop-window-and-background-fixed/" class="post-title-link" itemprop="url">在彈出視窗時隱藏背景滾軸</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-02-27 18:50:19" itemprop="dateCreated datePublished" datetime="2020-02-27T18:50:19+00:00">2020-02-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-04-05 20:00:08" itemprop="dateModified" datetime="2021-04-05T20:00:08+00:00">2021-04-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/02/pop-window-and-background-fixed/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/pop-window-and-background-fixed/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>先前專案在開發移動版時，本來是用推移的方式展開 navbar 選單，後來客戶希望用覆蓋全畫面的方式來打開選單。</p>
+<p>本來想說要不要用 Bootstrap 提供的現有工具解決。移動版 navbar 點擊後跳出的覆蓋視窗，其實概念類似於 BS 提供的 modal，即強制彈出一個新畫面，脫離原先瀏覽網頁內容的情境。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://bootstrap.hexschool.com/docs/4.0/components/modal/">互動視窗 (Modal)・Bootstrap 4 繁體中文手冊 [六角學院譯]</a></li>
+</ul>
+<p>最後我還是想嘗試用 CSS 土法煉鋼的方式，將 pop window 展開到全畫面以達成需求。</p>
+<p>結果出現了一個問題：pop window 覆蓋全畫面時，右邊滾軸竟然還在，而且可以被滾動</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/pop-window-and-background-fixed/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>
