@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="打王(被王打)示意圖  楔子在 2019 年的年中，我在前端的路上陸續做了這些事情：接六角的遠端切版助教、參加 iT 邦幫忙的鐵人賽、以及邊上六角的課程。本來想說寫完鐵人賽 就回家去種田了 就專心上六角的課程，但在十月初、鐵人賽進行到一半的時候，我接到一封神秘的訊息。 這封訊息，讓我踏上了一段長達數個月的旅途。 究竟這封神秘的訊息透露出什麼資訊，以及在後續的路途上會有怎樣的遭遇呢？ 讓我們繼續">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次前端接案打王(被王打)的心得">
+<meta property="og:url" content="https://ayugioh2003.github.io/2020/02/first-frontend-case/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="打王(被王打)示意圖  楔子在 2019 年的年中，我在前端的路上陸續做了這些事情：接六角的遠端切版助教、參加 iT 邦幫忙的鐵人賽、以及邊上六角的課程。本來想說寫完鐵人賽 就回家去種田了 就專心上六角的課程，但在十月初、鐵人賽進行到一半的時候，我接到一封神秘的訊息。 這封訊息，讓我踏上了一段長達數個月的旅途。 究竟這封神秘的訊息透露出什麼資訊，以及在後續的路途上會有怎樣的遭遇呢？ 讓我們繼續">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/tkMs2Ag.png">
+<meta property="og:image" content="https://i.imgur.com/nbMfax5.gif">
+<meta property="og:image" content="https://i.imgur.com/hQzo2uY.gif">
+<meta property="og:image" content="https://i.imgur.com/7K1osZ8.jpg">
+<meta property="article:published_time" content="2020-02-04T18:10:11.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.508Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="w3Hexschool-2020-challenge">
+<meta property="article:tag" content="接案">
+<meta property="article:tag" content="接案心得">
+<meta property="article:tag" content="接案2019">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/tkMs2Ag.png">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2020/02/first-frontend-case/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>第一次前端接案打王(被王打)的心得 | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A5%94%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">楔子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%8E%A5%E5%8F%97%E4%BB%BB%E5%8B%99"><span class="nav-number">2.</span> <span class="nav-text">第一章：接受任務</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E4%BB%BB%E5%8B%99%E9%96%8B%E5%A7%8B%E5%89%8D%E7%9A%84%E5%80%8B%E4%BA%BA%E6%88%B0%E5%8A%9B%E8%88%87%E5%BF%83%E6%85%8B%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">第二章：任務開始前的個人戰力與心態分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E4%BB%BB%E5%8B%99%E4%BB%8B%E7%B4%B9"><span class="nav-number">4.</span> <span class="nav-text">第三章：任務介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%96%8B%E6%9C%83%E6%88%90%E5%93%A1%E8%88%87%E5%90%88%E4%BD%9C%E9%97%9C%E4%BF%82"><span class="nav-number">4.1.</span> <span class="nav-text">一、開會成員與合作關係</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%BB%E5%8B%99%E5%85%A7%E5%AE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">二、任務內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%B5%84%E9%9A%8A%E6%88%90%E5%93%A1"><span class="nav-number">4.3.</span> <span class="nav-text">三、組隊成員</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%BA%9D%E9%80%9A%E8%88%87%E5%8D%94%E4%BD%9C%E5%B7%A5%E5%85%B7"><span class="nav-number">4.4.</span> <span class="nav-text">四、溝通與協作工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">4.5.</span> <span class="nav-text">五、開發流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E6%8C%91%E6%88%B0%E8%88%89%E9%9A%85"><span class="nav-number">5.</span> <span class="nav-text">第四章：挑戰舉隅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E5%88%9D%E6%9C%9F%E4%BB%BB%E5%8B%99%E5%8D%A1%E5%8D%A1%E7%9A%84%E5%92%9A%E5%90%B1%E5%92%9A%E5%90%B1"><span class="nav-number">6.</span> <span class="nav-text">第五章：初期任務卡卡的咚吱咚吱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9E%B6%E6%A7%8B%E7%9A%84%E6%8C%91%E9%81%B8"><span class="nav-number">6.1.</span> <span class="nav-text">一、架構的挑選</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%95%8F%E9%A1%8C%E7%9A%84%E8%A7%A3%E6%B1%BA"><span class="nav-number">6.2.</span> <span class="nav-text">二、問題的解決</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8D%94%E4%BD%9C%E7%9A%84%E7%A3%A8%E5%90%88"><span class="nav-number">6.3.</span> <span class="nav-text">三、協作的磨合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9AFeedback-%E8%BD%9F%E7%82%B8"><span class="nav-number">7.</span> <span class="nav-text">第六章：Feedback 轟炸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%82%E7%AB%A0%EF%BC%9A%E5%9B%9E%E9%A1%A7"><span class="nav-number">8.</span> <span class="nav-text">終章：回顧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%9A%84%E8%B3%87%E6%96%99"><span class="nav-number">9.</span> <span class="nav-text">參考的資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">10.</span> <span class="nav-text">後記</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2020/02/first-frontend-case/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第一次前端接案打王(被王打)的心得<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2020-02-04-first-frontend-case.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-02-04 18:10:11" itemprop="dateCreated datePublished" datetime="2020-02-04T18:10:11+00:00">2020-02-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/frontend-develop/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/02/first-frontend-case/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/first-frontend-case/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://i.imgur.com/tkMs2Ag.png" alt="組隊打王示意圖"></p>
+<blockquote>
+<p>打王(被王打)示意圖</p>
+</blockquote>
+<h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>在 2019 年的年中，我在前端的路上陸續做了這些事情：接六角的遠端切版助教、參加 iT 邦幫忙的鐵人賽、以及邊上六角的課程。本來想說寫完鐵人賽 <del>就回家去種田了</del> 就專心上六角的課程，但在十月初、鐵人賽進行到一半的時候，我接到一封神秘的訊息。</p>
+<p>這封訊息，讓我踏上了一段長達數個月的旅途。</p>
+<p>究竟這封神秘的訊息透露出什麼資訊，以及在後續的路途上會有怎樣的遭遇呢？</p>
+<p>讓我們繼續看下去…</p>
+<span id="more"></span>
+
+<h2 id="第一章：接受任務"><a href="#第一章：接受任務" class="headerlink" title="第一章：接受任務"></a>第一章：接受任務</h2><p>故事是從 2019.10.04 開始的：</p>
+<blockquote>
+<p>哈囉，這邊有個案子，有興趣嗎？</p>
+</blockquote>
+<p>看著彈出的視窗寫著王志誠老師的名字（後續以 Casper 代稱），發現前面的幾次對話是 <del>老師安安初次見面可以好友加加嗎</del> 當時參加六角同學會時，先當場詢問過志誠老師能不能加臉書好友，後來再到臉書上打招呼的訊息。</p>
+<p>看到 Casper 的訊息後，大概知道發生了什麼事情。六角學院在 2019 年底時多了一個<a target="_blank" rel="noopener" href="https://www.hexschool.com/case/">前端外包媒合服務</a>，而目前 Casper 在詢問我有沒有接案的意願。</p>
+<p>沒想到上次還只是在打招呼，接著就是在討論接案的事情了。不知為什麼，<del>有一種回新手村找 NPC 拿任務的感覺</del> XD</p>
+<p>幾經思量後，我決定接下這個遠端寫網頁的案子，開始第一次的接案打王(被王打)日子。</p>
+<h2 id="第二章：任務開始前的個人戰力與心態分析"><a href="#第二章：任務開始前的個人戰力與心態分析" class="headerlink" title="第二章：任務開始前的個人戰力與心態分析"></a>第二章：任務開始前的個人戰力與心態分析</h2><p>其實從收到訊息到接受，我猶豫了一陣子。主要是不曉得自己的能力夠不夠接案。以下是我當時的能力經驗：</p>
+<p>前端相關能力</p>
+<ul>
+<li>基礎前端：HTML、CSS</li>
+<li>樣式進階：RWD、SASS、BS</li>
+<li>JS 技能：ES6、VUE (學到一半)</li>
+<li>前端相關：VSCode、Git、gulp</li>
+</ul>
+<p>前端相關經驗</p>
+<ul>
+<li>六角遠端切版助教 (2019)</li>
+<li>iT邦幫忙鐵人賽撰寫中 (2019.09-)<ul>
+<li>後來得到佳作 (2020.01)</li>
+</ul>
+</li>
+</ul>
+<p>後來，Casper 說這個專案可能跟視差滾動有關，於是在等待專案開始的期間(10/04-10/08)，就複習了一下六角在響應式課程中介紹到的視差滾動課程，先備起來用。</p>
+<h2 id="第三章：任務介紹"><a href="#第三章：任務介紹" class="headerlink" title="第三章：任務介紹"></a>第三章：任務介紹</h2><p>有點像是辦營隊前的行前會概念，在這個專案開始前也有個線上會議(10/09)。在會議的過程中，我大概理解到這些事情：</p>
+<h3 id="一、開會成員與合作關係"><a href="#一、開會成員與合作關係" class="headerlink" title="一、開會成員與合作關係"></a>一、開會成員與合作關係</h3><p>開會的成員分別是 Fable 與六角的成員，而發包的是一間品牌設計公司。我想像中的合作關係大概是這樣：</p>
+<ul>
+<li>客戶公司：紐約的公司。為了實現商業規劃，尋求外部協助</li>
+<li>品牌設計公司：紐約的品牌設計公司。協助客戶的品牌設計需求</li>
+<li>Fable：台灣的接外包專案的公司，依專案性質建立 UI、前端、後端等團隊以完成外包需求。在這次專案中接了品牌設計公司的發包</li>
+<li>六角學院：台灣的前端工程師教育公司。與 Fable 合作媒合前端人才</li>
+<li>我：完成前端切版、動畫、互動、接 API 需求</li>
+</ul>
+<h3 id="二、任務內容"><a href="#二、任務內容" class="headerlink" title="二、任務內容"></a>二、任務內容</h3><p>客戶當時似乎是想重新設計官網，初期提出的需求是一頁式官網，以及問卷頁面。不過中後期有擴增需求，變成多頁式官網、也多了一些串 API、新增動畫效果等等的需求。原先預估是一個月的專案，最後擴增需求變成約三個月結案。</p>
+<h3 id="三、組隊成員"><a href="#三、組隊成員" class="headerlink" title="三、組隊成員"></a>三、組隊成員</h3><p><a target="_blank" rel="noopener" href="https://hsiangfeng.github.io/learnexp/20190918/2622329192/">套句 Ray 說的話，我位於前端團隊中</a>。剛開始的成員有兩個，六角方的我（切版、串 API）與 Fable 方的 Roy（類似 PM 角色）。在中後期因為一些原因，六角方的 Casper 和 Ray 有加進來協同開發一陣子。而 Roy 後期除了當 PM 角色外，還有擔當後端角色（猛猛的）</p>
+<h3 id="四、溝通與協作工具"><a href="#四、溝通與協作工具" class="headerlink" title="四、溝通與協作工具"></a>四、溝通與協作工具</h3><p>在溝通工具部份以 Slack 為主，由於先前當六角助教期間有使用 Slack 幾個月的經驗，就沒什麼太大問題；當功能比較抽象，要清楚地傳遞需求時，就會另外用 zoom 視訊，或是附帶簡報。</p>
+<p>協作工具部份，設計師（好像是 Fable 方的）會將設計稿上傳到 Zeplin，這樣我（前端工程師）就可以直接在瀏覽器上查看。另外程式碼是用 Git + Github 進行協作，我自己也會主動開 issue 整理需求與功能。感謝 Github 現在開私人專案不用錢錢。</p>
+<h3 id="五、開發流程"><a href="#五、開發流程" class="headerlink" title="五、開發流程"></a>五、開發流程</h3><p>Roy（PM）會先跟案主、設計師開會，了解需求、討論出需要什麼功能、畫面，設計師會出稿到 Zepzin 上。我（前端工程師）則在理解需求與功能後，開始切版或實做功能。</p>
+<p>前期的前端工作因為主要是我開發，所以開發流程的版控幾乎就是一路在 master 主分支上操作 XD。中後期開始有比較多的協作，採用的開發流程比較像是狂開分支的 git flow，有時再搭配 Pull Request 讓程式碼在推送合併到 Github 前，讓團隊有檢視程式碼的機會。</p>
+<h2 id="第四章：挑戰舉隅"><a href="#第四章：挑戰舉隅" class="headerlink" title="第四章：挑戰舉隅"></a>第四章：挑戰舉隅</h2><p>在打王(被王打)的過程中，最常面對的一個挑戰就是解決未知的、沒處理過的需求。舉幾個在專案過程中遇到的、比較容易視覺化出來的功能需求好了。</p>
+<p>一）<a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/rNNWWLq">漸層色進度提示條</a>。當時因為看不太懂需求是什麼，處理得有點久，後來就陸續調整成符合自適應、線段間距粗細、漸層色等需求的形式。動態效果是我後來才加在 Codepen 上的，沒有用到專案中。</p>
+<p><img src="https://i.imgur.com/nbMfax5.gif" alt="漸層色進度條"></p>
+<p>二）<a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/pooXGjo">展開動畫提示框</a>。當時這個需求一開始不太知道該怎麼實做，即提示框的外框先延展開來，過個幾秒內文才浮現。後來想起動畫就像魔術一樣，是一種障眼法，表象認為的結構與實際形成的結構是不需要一樣的，只要有看起來的效果符合預期即可。於是後來把外框與文字各自獨立成不同的元素，這樣動畫就可以分別控制外框的展開與文字的出現時機，且這樣文字就不受外框大小擠壓的影響了。</p>
+<p><img src="https://i.imgur.com/hQzo2uY.gif" alt="展開動畫提示框"></p>
+<p>三）IG 圖片牆。這個需求我苦惱了好一陣子，因為我之前沒研究過 Instagram 的 API，且它的 API 持續在變動，有很多限制與不可控因素，光是研究就一個頭兩個大。研究過很多方案後，這個需求最後是好心的 Roy (中後期兼職後端) 在後端開了一個抓 IG 資料的 API 給我才解決的。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.facebook.com/groups/DevCTaipei/permalink/1477097829108301/">Facebook Developer Circle: Taipei</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/YzzRRYO">Test Instagram API ?__a=1</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/VwwVGjO">Fetch public photos from Instagram without the API</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/WNNaZba">snapwidget demo</a></li>
+</ul>
+<p><img src="https://i.imgur.com/7K1osZ8.jpg" alt="IG圖片牆"></p>
+<h2 id="第五章：初期任務卡卡的咚吱咚吱"><a href="#第五章：初期任務卡卡的咚吱咚吱" class="headerlink" title="第五章：初期任務卡卡的咚吱咚吱"></a>第五章：初期任務卡卡的咚吱咚吱</h2><p>專案開始後，一路上遇上不少挑戰。在專案的初期，我自覺有進行的比較慢，有段時間 Roy(PM) 也有提醒我要盡量趕上進度。以下是我認為當時會比較慢的可能原因：</p>
+<h3 id="一、架構的挑選"><a href="#一、架構的挑選" class="headerlink" title="一、架構的挑選"></a>一、架構的挑選</h3><p>當時我在考慮專案的架構要怎麼安排時想了一陣子。後來想說因為需求是一頁式官網、問卷服務，加起來有兩個頁面，可能會有比較多重複的區塊與樣式，就決定用比較熟悉的 gulp 建構工具 + EJS 模板 + SASS 去處理。</p>
+<p>另外，因為也有一些畫面互動、資料處理的需求，就引入了前端框架 vue 來處理，當時是用 cdn 的方式引入。不過後來 Roy 有跟我建議說，之後有用到 vue 的話，搭配 webpack 來使用會比較好。這我也同意。之後應該要研究一下 vue 怎麼達到多頁面配置的需求，例如預渲染或伺服器端渲染等解決方案。</p>
+<p>這部份我自己的檢討是，當時應該要先清楚講出自己要採用的架構方案，在 Slack 中跟大家討論可行性、擴充性等部份，這樣才不會自己想老半天拖慢進度、或之後要改變架構時會很麻煩。</p>
+<h3 id="二、問題的解決"><a href="#二、問題的解決" class="headerlink" title="二、問題的解決"></a>二、問題的解決</h3><p>在專案初期時，如果我遇到了問題，我會先自己搜尋解決方案，像是過去的課程筆記、google、Stack Overflow、前端社群、開發文件等等。雖然大部分都能找到堪用的方案，但就是開發時間會被拉長，而且不確定這方案是不是最佳解。</p>
+<p>後來經過各方人馬(?)的開導後，都一致同意 <del><a target="_blank" rel="noopener" href="https://www.ptt.cc/bbs/C_Chat/M.1570375703.A.084.html">你不會更新你要先講</a></del> 如果遇到暫時無法解決且會拖到進度的狀況，就回報到 Slack 中讓大家一起想辦法解決。</p>
+<p>我的檢討是，在這種有時間壓力的專案中，以開發進度為優先考量。不要想說這種功能自己竟然不會覺得自己很遜、或不敢問別人之類的。在合理(真的有困難度)、有邏輯(有先自行除錯、把需求過程理順)的請教下，在 Slack 群中的人會願意幫忙的。</p>
+<h3 id="三、協作的磨合"><a href="#三、協作的磨合" class="headerlink" title="三、協作的磨合"></a>三、協作的磨合</h3><p>這跟第二點有點類似。因為是第一次接案，我對於協同開發的模式較陌生，沒有過往的經驗能讓我遵循。像是該怎麼把遇到的做不太到的功能清楚表達出來讓 PM 知道、該怎麼回饋給設計師有些可能缺少的 UI 界面。熟悉這些協作模式讓我摸索了一陣子。</p>
+<p>在專案初期，PM 可能會不了解我的能力在哪，不曉得我是否能跟上開發的時程。這導致 PM 在整個專案期間，會需要主動追我目前的開發進度到哪了。</p>
+<p>我的檢討是，首先，和第二點一樣，要不害怕溝通與詢問，以開發進度為優先考量。其次，主動和團隊說明自己的進度在那，時間點可以在某個功能完成時、或是每天的晚上。</p>
+<h2 id="第六章：Feedback-轟炸"><a href="#第六章：Feedback-轟炸" class="headerlink" title="第六章：Feedback 轟炸"></a>第六章：Feedback 轟炸</h2><p>開發到一定程度後，就會開始數次的驗收、或是追加需求。我記得我在專案初期時完全沒注意到驗收這件事情，以為整個專案時間就是我的開發時間，讓我自己在初期的開發時間沒有抓好。</p>
+<p>除了驗收的 feedback 外，還有其他一些會影響開發時程的變數。像是有 bug、需求追加、有些比較難實現的需求、或是趕在客戶方開會前修完 feedback。</p>
+<p>舉一個比較極端的例子。有天下午我正準備替目前進度收尾時，我阿嬤在浴室跌倒撞破頭出血。我一邊試著幫忙止血與清理現場、一邊聯絡我爸準備一起去急診、一邊急忙收尾進度與聯絡 PM 告知部份狀況。</p>
+<p>後來晚上在急診時被告知有 feedback 要修，問說明天早上有沒有辦法處理好，我就快崩潰了 QQ。於是先告知我目前無法處理，PM 說他會想辦法，先讓我專心處理好家裡的事情。</p>
+<p>半夜十二點回家後，我可能腦袋壞掉了，跟 PM 說我接手剩下來的 feedback (PM 有問我真的 OK 嗎不要勉強 QQ)。當時雖然有在想說，這時間安排是要逼死誰，但還是想說這是我第一次接案，想要盡量做好，就還是接下來修了。</p>
+<p>最後修 feedback 修到早上八點，跟 Slack 群組交接一下進度後就去補眠到早上十點，陪阿嬤去醫院洗腎。處理到一個段落時，大概中午就先離開回家補眠。我記得我在補眠時回想過去幾個小時發生的事情，在心裡面一直問自己「我是誰、我在哪、我為什麼要這麼累地做這些事情」QQ</p>
+<p>我的檢討是，要做好時間控管，預留時間給修 bug 或 feedback、提前思考未來可能會追加什麼功能預先做好準備。注意自己的壓力與健康狀況，來不及做的功能就說出來。</p>
+<h2 id="終章：回顧"><a href="#終章：回顧" class="headerlink" title="終章：回顧"></a>終章：回顧</h2><p>在經過三個多月後的二〇二〇的一月底，終於結案惹（灑花）。這接案的過程中很感謝 Fable 的 Roy，以及六角的 Ray、Casper。</p>
+<p>Roy 除了擔任 PM 的角色，與案主、設計溝通完需求與功能會通知我外，在專案中後期也有處理後端與後台的部份。有些時候還會陪我研究一些 issue，真的很 <del>小叮噹</del> 很厲害。Casper 除了介紹我接案的機會外，也有詢問我目前進度如何、在有困難時提供我資源。感謝 Ray 當時在我無暇顧及專案的時候，幫我處理了一些 issue，讓我有時間處理家裡的事情。</p>
+<p>我在這個專案中獲得滿多東西的。除了比較直觀的像是獲得磨練前端技術的機會（如輪播、動畫、接API、SASS架構等等），也體驗到整個專案是如何進行的，以及實際地協作溝通。</p>
+<p>雖然過程滿累的，但對第一次接案的我來說，收穫頗豐。</p>
+<h2 id="參考的資料"><a href="#參考的資料" class="headerlink" title="參考的資料"></a>參考的資料</h2><p>在做專案期間，有時會產生迷惘，像是有些東西我都不會因而沒信心、突然開始懷疑人生與未來。這時就會等比較空閒時（等待 feedback），看一些前人的經驗談。以下是我看過的一些文章</p>
+<p>軟體工程師菜鳥時期可參考。看完後可以體會到，就算是很厲害的人，當時也曾迷惘過，因此心情就會好一點（？）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20040221/ironman/2236">菜鳥工程師必修的 30 堂溝通課 :: 第 11 屆 iT 邦幫忙鐵人賽</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20040221/ironman/1247">前端工程師養成手冊 :: 2018 iT 邦幫忙鐵人賽</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20004901/ironman/526">Will 保哥的 IT 創業之路 :: 2013 iT 邦幫忙鐵人賽</a></li>
+</ul>
+<p>開發習慣。因為開發初期時主要只有我寫前端部份，撰寫風格感覺比較沒規範與奔放。後來需要和別人協作時（如 Roy 和 Ray）就對他們不好意思，好像讓他們看到爛 code 了 orz。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20107637/ironman/1927">可不可以不要寫糙 code :: 2019 iT 邦幫忙鐵人賽</a></li>
+</ul>
+<p>除了前端技術外，接案的過程本身就是值得分享、聽聽別人經驗的事情。之前有看過六角其他接案前輩的心得，讓我在開發時覺得自己其實不孤單 QQ</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.hexschool.com/case/">廠商發案平台 | RWD 切版、API 介接、前端人才外包 | 六角學院</a></li>
+<li><a target="_blank" rel="noopener" href="https://hsiangfeng.github.io/learnexp/20190918/2622329192/">關於接案服務的這件事 | Welcome.Web.World</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.facebook.com/groups/110635703123103/permalink/552040332315969/">感謝馬維君前端開發，Fable 官網如期上線 - 六角學院學員社團</a><ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/%E9%A6%AC%E6%A0%BC%E8%95%BE%E7%89%B9%E7%9A%84%E5%86%92%E9%9A%AA%E8%80%85%E6%97%A5%E8%AA%8C/%E6%8E%A5%E6%A1%88%E5%88%9D%E9%AB%94%E9%A9%97-%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%9A%84%E6%88%90%E9%95%B7%E7%97%9B-e1f804014044">接案初體驗：前端之路的成長痛 - 馬格蕾特的樹洞 - Medium</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>因為有報名六角學院舉辦的<a target="_blank" rel="noopener" href="https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge">「鼠年全馬鐵人挑戰賽」</a>寫文活動，加上自己也想整理這次接案學到的東西，估計接下來幾篇都會是跟這次專案相關的文章，再請有興趣的人多多指教惹。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+          <div class="post-tags">
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/w3Hexschool-2020-challenge/" rel="tag"># w3Hexschool-2020-challenge</a>
+              <a href="/tags/%E6%8E%A5%E6%A1%88/" rel="tag"># 接案</a>
+              <a href="/tags/%E6%8E%A5%E6%A1%88%E5%BF%83%E5%BE%97/" rel="tag"># 接案心得</a>
+              <a href="/tags/%E6%8E%A5%E6%A1%882019/" rel="tag"># 接案2019</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/w3Hexschool-2020-challenge/" rel="prev" title="報名六角學院的 w3HexSchool 鼠年全馬鐵人挑戰">
+                  <i class="fa fa-chevron-left"></i> 報名六角學院的 w3HexSchool 鼠年全馬鐵人挑戰
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/hide-header/" rel="next" title="網頁下滾時隱藏header，上滾時才顯示">
+                  網頁下滾時隱藏header，上滾時才顯示 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2020/02/first-frontend-case/";
+    this.page.identifier = "2020/02/first-frontend-case/";
+    this.page.title = "第一次前端接案打王(被王打)的心得";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

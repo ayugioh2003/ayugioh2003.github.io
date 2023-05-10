@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="最近上了六角的Node.js 後端工程師養成直播班課程；在上週日的專題報告後，課程算是正式結束了。這篇是完課的心得文，大綱參考六角提供的架構。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角 Node.js 後端工程師養成直播班心得">
+<meta property="og:url" content="https://ayugioh2003.github.io/2022/06/hex-nodejs-class-2022/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="最近上了六角的Node.js 後端工程師養成直播班課程；在上週日的專題報告後，課程算是正式結束了。這篇是完課的心得文，大綱參考六角提供的架構。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/PGdgxhZ.png">
+<meta property="og:image" content="https://i.imgur.com/TsHO37b.png">
+<meta property="article:published_time" content="2022-06-15T03:38:05.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.508Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/PGdgxhZ.png">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2022/06/hex-nodejs-class-2022/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>六角 Node.js 後端工程師養成直播班心得 | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%B6%E5%88%9D%E7%82%BA%E4%BB%80%E9%BA%BC%E5%A0%B1%E5%90%8D%E9%80%99%E5%A0%82%E8%AA%B2%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">當初為什麼報名這堂課？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%80%B1-%E7%AC%AC%E5%85%AB%E9%80%B1%E7%9A%84%E5%AD%B8%E7%BF%92%E9%81%8E%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第一週~第八週的學習過程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%9A%84%E6%94%B6%E7%8D%B2%E6%98%AF%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">最大的收獲是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%96%9C%E6%AD%A1%E7%9B%B4%E6%92%AD%E7%8F%AD%E7%9A%84%E5%93%AA%E4%BA%9B%E6%B4%BB%E5%8B%95%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">最喜歡直播班的哪些活動？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%99%82%E5%85%89%E8%83%BD%E5%80%92%E6%B5%81%EF%BC%8C%E6%9C%83%E5%B8%8C%E6%9C%9B%E8%87%AA%E5%B7%B1%E5%86%8D%E6%AC%A1%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E7%B4%B0%E7%AF%80%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">如果時光能倒流，會希望自己再次注意哪些細節？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D%E8%AA%B2%E7%A8%8B%E7%9A%84%E5%BB%BA%E8%AD%B0%E6%88%96%E9%BC%93%E5%8B%B5%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">對課程的建議或鼓勵？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E7%82%BA%E5%AD%B8%E9%95%B7%E5%A7%90%EF%BC%8C%E5%88%86%E4%BA%AB%E4%BA%9B%E6%83%B3%E5%85%A5%E5%9D%91%E7%9A%84%E6%96%B0%E5%90%8C%E5%AD%B8%E4%B8%80%E4%BA%9B%E5%8B%89%E5%8B%B5%E7%9A%84%E8%A9%B1"><span class="nav-number">7.</span> <span class="nav-text">身為學長姐，分享些想入坑的新同學一些勉勵的話</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">8.</span> <span class="nav-text">小結</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2022/06/hex-nodejs-class-2022/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角 Node.js 後端工程師養成直播班心得<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2022-06-15-hex-nodejs-class-2022.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-06-15 03:38:05" itemprop="dateCreated datePublished" datetime="2022-06-15T03:38:05+00:00">2022-06-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/backend/" itemprop="url" rel="index"><span itemprop="name">backend</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/06/hex-nodejs-class-2022/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/06/hex-nodejs-class-2022/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://i.imgur.com/PGdgxhZ.png" alt="課程封面圖"></p>
+<p>最近上了六角的<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/node-training.html">Node.js 後端工程師養成直播班</a>課程；在上週日的專題報告後，課程算是正式結束了。這篇是完課的心得文，大綱參考六角提供的架構。</p>
+<span id="more"></span>
+
+<h2 id="當初為什麼報名這堂課？"><a href="#當初為什麼報名這堂課？" class="headerlink" title="當初為什麼報名這堂課？"></a>當初為什麼報名這堂課？</h2><p>從我開始學習前端技術以來，我就對後端充滿了好奇，覺得不會後端的前端是不完整的。之前有上過其他的後端課程，像是六角的<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/nodejs.html">Node.js 前後端開發實戰</a>，或是<a target="_blank" rel="noopener" href="https://www.freecodecamp.org/">FreeCodeCamp</a>的課程。</p>
+<p>不過前者是用 EJS 的 Server Side Render，而我想要學前後端分離的後端寫法；FreeCodeCamp 有教開 API 的方式，但沒有教一些後端開發常用的功能，例如權限驗證、錯誤處理。雖然我從兩門課程都有學到很多東西，但卻還不是我心中最想要的：適合前後端分離的後端課程。</p>
+<p>就在我剛學完 FreeCodeCamp 的課程沒多久，正在尋覓其他 Node.js 的線上課程時，剛好看到六角學院的校長廖洧杰在六角學院的臉書社團<a target="_blank" rel="noopener" href="https://www.facebook.com/groups/110635703123103/posts/1076222186564445/">發貼文</a>，說準備開一門後端的直播班課程。</p>
+<p>看了課程大綱後，覺得裡面有內容是我需要的，於是就拿出魔法小卡報名了。</p>
+<h2 id="第一週-第八週的學習過程"><a href="#第一週-第八週的學習過程" class="headerlink" title="第一週~第八週的學習過程"></a>第一週~第八週的學習過程</h2><p>在六角的這們課程，有多種作業類型：主線任務、小組任務、每日任務。我基本上是以完成所有八週的主線任務的目的在上課的。小組任務是支線任務，參加的話期末會有一個專題報告，洧杰老師會邀請廠商來聽。每日任務的話我因為時間分配的考量，以及大多數課程內容我都吸收良好，所以每日任務我選擇都沒參加。</p>
+<p>前四週的課程，內容大概是如何建立 http server、引入 MongoDB、引入 mongoose、引入 Express、以及資料庫設計。因為之前有上過後端課程的經驗，基本上前四周的課程對我來說沒有壓力、前幾週的小組作業難度也低。學習過程大概就是</p>
+<ol>
+<li>週五晚上上課，開聊天室講幹話(XD)、邊開 Notion 筆記簡單記一下</li>
+<li>週末，把主線任務做一做、開小組會議</li>
+<li>週間，自己找補充資料，呼應課程內容</li>
+</ol>
+<p>在第五週開始，因為有比較不熟內容像是錯誤處理、JWT 身分驗證，加上小組作業開始難度提高、加上我是小組長需要花時間 Code Review，所以主線任務開始懶得做，心力先放在小組任務上。學習過程大概是</p>
+<ul>
+<li>週五晚上上課，邊開聊天室講幹話邊筆記</li>
+<li>週末，開小組會議、複習週五的課程、Code Review 小組作業</li>
+<li>週間，複習週五的課程、Code Review 小組作業</li>
+</ul>
+<p>在第七週上課時，老師提到如果提早完成全部作業的話，會有加碼獎品，所以我在第八週時就把第五六七週的作業迅速完成了 XD。同時我也猜測第八週的作業內容並提前完成，等到第八週上課公布作業內容時，我稍微修改一下 Code 就可以交作業了。(所以我是第一個交全部作業的，因為我在第八週線上直播過不到半小時，我就交作業了 XD)</p>
+<p><img src="https://i.imgur.com/TsHO37b.png" alt="完成任務時間截圖"></p>
+<h2 id="最大的收獲是？"><a href="#最大的收獲是？" class="headerlink" title="最大的收獲是？"></a>最大的收獲是？</h2><p>以課程內容來說的話，有幾個內容是我決定上課時，會想學到的知識點：資料庫設計、錯誤處理、以及權限管理。而這些內容確實在課程中也有提到，覺得還不錯。</p>
+<h2 id="最喜歡直播班的哪些活動？"><a href="#最喜歡直播班的哪些活動？" class="headerlink" title="最喜歡直播班的哪些活動？"></a>最喜歡直播班的哪些活動？</h2><p>跟其他工程師一起協作小組專題，應該是我最喜歡的活動了吧。而我恰好被選為組長，同時體驗到後端工程師、技術組長、PM 的角色觀點。<del>多種痛苦一次滿足</del></p>
+<p><del>啊，當然還有老師加碼的各種活動，真希望主委可以多加碼一點</del></p>
+<h2 id="如果時光能倒流，會希望自己再次注意哪些細節？"><a href="#如果時光能倒流，會希望自己再次注意哪些細節？" class="headerlink" title="如果時光能倒流，會希望自己再次注意哪些細節？"></a>如果時光能倒流，會希望自己再次注意哪些細節？</h2><p>個人作業的專案，我會每週作業開一個分支來實作；我在第二週時才想到這件事情。現在我的個人作業有兩個 REPO，看了有點啊雜 XD</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ayugioh2003/HexNodejsTodo">ayugioh2003/HexNodejsTodo</a> 第一週個人主線作業</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ayugioh2003/hex-nodejs-exercise">ayugioh2003/hex-nodejs-exercise</a> 第二到八週個人主線作業</li>
+</ul>
+<p>小組協作的共筆，可能會想一開始就用 Notion，而不是 HackMD 跟 Google Sheet 搭配使用。課程中的預設推薦是使用 HackMD、且確實不錯用，但它的表格功能實在不太好用，導致我中期還需要開 Google Sheet 去管理專案進度。</p>
+<p>在小組開發的部分，身為組長，可能要更清楚介入修改程式碼的時機點，像是不要過早的介入。在第一週的作業中，要求只有用 http server 寫一個 todolist 的後端，但我卻引入了 ES module 跟 routes/controller/model 分層的觀念，讓第一週小組作業的複雜度變得有點高（雖然我覺得這樣比較漂亮）。</p>
+<p>除了不要過早介入修改外，有時候也要限制組員的寫法，例如我應該第一週就要求每個組員都安裝 ESLint；沒有限制的結果，導致專案中有各式各樣的 coding style，風格不統一。</p>
+<p>API 文件的部分，本來建立基礎建設時，由一個後端用 swagger.json 管理，但最後後續開發的其他後端就沒有更新 swagger 了。或許 swagger 設定寫進路由 JS 檔案裡面再自動產生文件的作法，對於多人協作會比較好。</p>
+<h2 id="對課程的建議或鼓勵？"><a href="#對課程的建議或鼓勵？" class="headerlink" title="對課程的建議或鼓勵？"></a>對課程的建議或鼓勵？</h2><p>建議的話，我就用列點的方式好了，比較多是課程網站的資訊設計</p>
+<ol>
+<li>課程頁面（程式勇者村）的資訊有點混亂。像是左邊導覽列有些資訊只用到一次就不需要了，或許可以整合起來，像是開學典禮與小組任務，這個只有在第一週會用到的資訊，卻佔了兩行內容。</li>
+<li>不曉得為什麼，主線任務的網址，被放在講義與主線任務 HackMD 的頁面裡面。例如想看第三週的主線任務，我需要點第三週講義與主線，接下來才有辦法點擊到主線任務的網址，查看到主線任務資訊。</li>
+<li>講義與主線的 HackMD 是內嵌，而小組任務的 HackMD 是新頁，覺得統一比較好。看是全部都用內嵌，或是可以用個 HackMD 的 book 模式統一管理，這樣找起來比較方便。</li>
+</ol>
+<p>鼓勵的話</p>
+<ol>
+<li>感謝老師的用心教學，教到有一週嗓子都啞掉了</li>
+<li>當有一組學員報告品質出狀況，老師馬上加碼補貼麥克風、以及高鐵票，這點真的大手筆</li>
+<li>感謝 Ray 助教的每週直播解說，雖然因為時間關係我都沒有跟直播</li>
+<li>感謝助教群的每週主線任務修改</li>
+<li>錯誤處理跟權限驗證有符合我修課前的預期，我覺得滿意 XD</li>
+</ol>
+<h2 id="身為學長姐，分享些想入坑的新同學一些勉勵的話"><a href="#身為學長姐，分享些想入坑的新同學一些勉勵的話" class="headerlink" title="身為學長姐，分享些想入坑的新同學一些勉勵的話"></a>身為學長姐，分享些想入坑的新同學一些勉勵的話</h2><p>如果跟我一樣是靠六角學前端出身、正在尋求後端入門的話，這門課程我還滿推薦的。畢竟師資、教法都是熟悉的味道(?)，同時老師也懂你在前端的程度，可以設身處地回覆你的疑惑，這樣學起來可以事半功倍。</p>
+<p>如果是新接觸到六角的前端，或是後端想來學 Node.js 的話，也可以考慮看看。這次 2022 年的 Node.js 直播班是第一屆，裡面也有一些是第一次接觸六角的學員。就我這個學員的側面看法，感覺他們也適應良好。尤其某一組很多組員都是後端出身，他們在做期末專題的第一週就幾乎把需要的後端 API 都做完了，怕.jpg。</p>
+<p>如果有參與小組作業、專題的話，協作的經驗也是滿有趣的，而且如果<del>不幸</del>有幸當上組長的話，還可以唆使其他組員去寫 Code，算是個有趣的體驗 XD</p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>想對第五組的組員一些話 XD</p>
+<p>前端部分</p>
+<ul>
+<li>泡沫：前端扛霸子（無誤）。感謝引入 Next.js、StoryBook 以及 TypeScript，而且我們還有線下見面過 XD</li>
+<li>Emi：雖然說對 Next.js 不熟，但我感覺妳和泡沫搭配得很好 ~</li>
+</ul>
+<p>後端部分</p>
+<ul>
+<li>Hazel：其實我把妳當副組長在看待 XD。感謝快速出 PR 跟時常幫忙出點子</li>
+<li>灰塵貓：感謝你常在第一時間就接下許多 loading，以及花很多時間研究 WebSocket</li>
+<li>Sihyun：我還是不會唸你的名字 XD。感謝你很穩定地產出程式碼</li>
+<li>Nap：每次私訊在討論協作的事情時，覺得你討論的語氣很有趣哈哈</li>
+<li>AmberCYT：感謝你後來很忙，但還是被我拉下水負責一小部分</li>
+<li>Zion：感謝在專題中期跟上課程進度後，主動說想加進來幫忙</li>
+</ul>
+<p>雖然後面幾週有點累，但整體來說，這堂課滿有趣、也吸收了不少資訊 ~</p>
+<p>(本來想放上專題報告時聊天室的有趣截圖，但發現我忘記儲存了⋯洧杰老師有沒有聊天室存檔 QQ)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+          <div class="post-tags">
+              <a href="/tags/HexSchool/" rel="tag"># HexSchool</a>
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/Backend/" rel="tag"># Backend</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/callback-function/" rel="prev" title="了解 JavaScript 中的 callback function">
+                  <i class="fa fa-chevron-left"></i> 了解 JavaScript 中的 callback function
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/css-prevent-line-in-text-to-only-contain-one-word/" rel="next" title="網頁排版的中文字換行至少兩個字">
+                  網頁排版的中文字換行至少兩個字 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2022/06/hex-nodejs-class-2022/";
+    this.page.identifier = "2022/06/hex-nodejs-class-2022/";
+    this.page.title = "六角 Node.js 後端工程師養成直播班心得";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="前言自從對 JavaScript 稍微有了解後，就斷斷續續的在學習語法。某日碰見 TamperMonkey 這個套件，就瞬間一見傾心了 XD 以下記錄有在使用的 js 腳本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目前安裝的 TamperMonkey 腳本">
+<meta property="og:url" content="https://ayugioh2003.github.io/2016/10/TamperMonkey-scripts-list/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="前言自從對 JavaScript 稍微有了解後，就斷斷續續的在學習語法。某日碰見 TamperMonkey 這個套件，就瞬間一見傾心了 XD 以下記錄有在使用的 js 腳本">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://ayugioh2003.github.io/images/20161030TamperMonkey.png">
+<meta property="article:published_time" content="2016-10-30T01:43:28.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.504Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="整理">
+<meta property="article:tag" content="TamperMonkey">
+<meta property="article:tag" content="Chrome">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ayugioh2003.github.io/images/20161030TamperMonkey.png">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2016/10/TamperMonkey-scripts-list/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>目前安裝的 TamperMonkey 腳本 | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%85%B3%E6%9C%AC%E6%95%B4%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">腳本整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anti-Adblock-Killer%EF%BD%9C%E6%93%8B%E5%81%B5%E6%B8%AC%E5%BB%A3%E5%91%8A"><span class="nav-number">2.1.</span> <span class="nav-text">Anti-Adblock Killer｜擋偵測廣告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Facebook-HD-Video-Downloader%EF%BD%9C%E4%B8%8B%E8%BC%89%E8%87%89%E6%9B%B8%E5%BD%B1%E7%89%87"><span class="nav-number">2.2.</span> <span class="nav-text">Facebook HD Video Downloader｜下載臉書影片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Highlight-Every-Code%EF%BD%9C%E9%AB%98%E4%BA%AE%E7%B6%B2%E9%A0%81%E4%B8%8A%E9%81%B8%E5%8F%96%E7%9A%84%E4%BB%A3%E7%A2%BC"><span class="nav-number">2.3.</span> <span class="nav-text">Highlight Every Code｜高亮網頁上選取的代碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-Traditional-Chinese-and-Simple%EF%BD%9C%E7%B0%A1%E7%B9%81%E4%BA%92%E6%8F%9B"><span class="nav-number">2.4.</span> <span class="nav-text">Switch Traditional Chinese and Simple｜簡繁互換</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Youtube-%EF%BD%9C%E9%AD%94%E6%94%B9youtube"><span class="nav-number">2.5.</span> <span class="nav-text">Youtube +｜魔改youtube</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Youtube-Best-Video-Downloader-2%EF%BD%9C%E4%B8%8B%E8%BC%89Youtube"><span class="nav-number">2.6.</span> <span class="nav-text">Youtube Best Video Downloader 2｜下載Youtube</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E5%80%91%E5%B0%B1%E6%98%AF%E4%B8%8D%E8%83%BD%E5%8A%A0%E5%80%8B%E7%A9%BA%E6%A0%BC%E5%91%A2%EF%BC%9F%EF%BD%9C%E4%B8%AD%E8%8B%B1%E4%B9%8B%E9%96%93%E5%8A%A0%E7%A9%BA%E6%A0%BC"><span class="nav-number">2.7.</span> <span class="nav-text">為什麼你們就是不能加個空格呢？｜中英之間加空格</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%AF%AB%E7%9A%84%E8%85%B3%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">自己寫的腳本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FB%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87"><span class="nav-number">3.1.</span> <span class="nav-text">FB分享引文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FB%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87-fb-quote"><span class="nav-number">3.1.1.</span> <span class="nav-text">FB分享引文 fb-quote</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FB%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87-fb-root"><span class="nav-number">3.1.2.</span> <span class="nav-text">FB分享引文 fb-root</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">參考連結</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2016/10/TamperMonkey-scripts-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          目前安裝的 TamperMonkey 腳本<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2016-10-30-TamperMonkey-scripts-list.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2016-10-30 01:43:28" itemprop="dateCreated datePublished" datetime="2016-10-30T01:43:28+00:00">2016-10-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">編程</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2016/10/TamperMonkey-scripts-list/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/TamperMonkey-scripts-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="/images/20161030TamperMonkey.png" alt="來源:https://git.io/vX4D3"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自從對 JavaScript 稍微有了解後，就斷斷續續的在學習語法。某日碰見 TamperMonkey 這個套件，就瞬間一見傾心了 XD 以下記錄有在使用的 js 腳本</p>
+<span id="more"></span>
+
+<hr>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E8%85%B3%E6%9C%AC%E6%95%B4%E7%90%86">腳本整理</a><ul>
+<li><a href="#anti-adblock-killer%E6%93%8B%E5%81%B5%E6%B8%AC%E5%BB%A3%E5%91%8A">Anti-Adblock Killer｜擋偵測廣告</a></li>
+<li><a href="#facebook-hd-video-downloader%E4%B8%8B%E8%BC%89%E8%87%89%E6%9B%B8%E5%BD%B1%E7%89%87">Facebook HD Video Downloader｜下載臉書影片</a></li>
+<li><a href="#highlight-every-code%E9%AB%98%E4%BA%AE%E7%B6%B2%E9%A0%81%E4%B8%8A%E9%81%B8%E5%8F%96%E7%9A%84%E4%BB%A3%E7%A2%BC">Highlight Every Code｜高亮網頁上選取的代碼</a></li>
+<li><a href="#switch-traditional-chinese-and-simple%E7%B0%A1%E7%B9%81%E4%BA%92%E6%8F%9B">Switch Traditional Chinese and Simple｜簡繁互換</a></li>
+<li><a href="#youtube-%E9%AD%94%E6%94%B9youtube">Youtube +｜魔改youtube</a></li>
+<li><a href="#youtube-best-video-downloader-2%E4%B8%8B%E8%BC%89youtube">Youtube Best Video Downloader 2｜下載Youtube</a></li>
+<li><a href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E5%80%91%E5%B0%B1%E6%98%AF%E4%B8%8D%E8%83%BD%E5%8A%A0%E5%80%8B%E7%A9%BA%E6%A0%BC%E5%91%A2%E4%B8%AD%E8%8B%B1%E4%B9%8B%E9%96%93%E5%8A%A0%E7%A9%BA%E6%A0%BC">為什麼你們就是不能加個空格呢？｜中英之間加空格</a></li>
+</ul>
+</li>
+<li><a href="#%E8%87%AA%E5%B7%B1%E5%AF%AB%E7%9A%84%E8%85%B3%E6%9C%AC">自己寫的腳本</a><ul>
+<li><a href="#fb%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87">FB分享引文</a><ul>
+<li><a href="#fb%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87-fb-quote">FB分享引文 fb-quote</a></li>
+<li><a href="#fb%E5%88%86%E4%BA%AB%E5%BC%95%E6%96%87-fb-root">FB分享引文 fb-root</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90">參考連結</a></li>
+</ul>
+<!-- tocstop -->
+
+<hr>
+<h1 id="腳本整理"><a href="#腳本整理" class="headerlink" title="腳本整理"></a>腳本整理</h1><p>因為腳本沒有很多，所以就不分類介紹惹</p>
+<h2 id="Anti-Adblock-Killer｜擋偵測廣告"><a href="#Anti-Adblock-Killer｜擋偵測廣告" class="headerlink" title="Anti-Adblock Killer｜擋偵測廣告"></a>Anti-Adblock Killer｜擋偵測廣告</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://github.com/reek/anti-adblock-killer/">reek/anti-adblock-killer: Anti-Adblock Killer helps you keep your Ad-Blocker active, when you visit a website and it asks you to disable.</a></li>
+</ul>
+<p>至今還不知道該怎麼使用它 …（原本用途是，繞開那些能偵測到 安裝者有裝擋廣告套件的機制），可能再過一陣子就把它刪了</p>
+<h2 id="Facebook-HD-Video-Downloader｜下載臉書影片"><a href="#Facebook-HD-Video-Downloader｜下載臉書影片" class="headerlink" title="Facebook HD Video Downloader｜下載臉書影片"></a>Facebook HD Video Downloader｜下載臉書影片</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/3481-facebook-hd-video-downloader">Facebook HD Video Downloader</a></li>
+</ul>
+<p>可以下載 Facebook 上的影片。雖然平常用不到，但還是下載起來備份用。</p>
+<h2 id="Highlight-Every-Code｜高亮網頁上選取的代碼"><a href="#Highlight-Every-Code｜高亮網頁上選取的代碼" class="headerlink" title="Highlight Every Code｜高亮網頁上選取的代碼"></a>Highlight Every Code｜高亮網頁上選取的代碼</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/24150-highlight-every-code">代碼片斷高亮</a></li>
+</ul>
+<p>這腳本超厲害的，按 <code>ctrl + 反白</code>，就能排列、高亮被圈選到的程式碼，省去一些整理程式碼時間。</p>
+<h2 id="Switch-Traditional-Chinese-and-Simple｜簡繁互換"><a href="#Switch-Traditional-Chinese-and-Simple｜簡繁互換" class="headerlink" title="Switch Traditional Chinese and Simple｜簡繁互換"></a>Switch Traditional Chinese and Simple｜簡繁互換</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/24300-switch-traditional-chinese-and-simplified-chinese">繁簡自由切換</a></li>
+</ul>
+<p>按 <code>F8</code> 能切換簡轉繁或繁轉簡。預設會自動轉繁體</p>
+<h2 id="Youtube-｜魔改youtube"><a href="#Youtube-｜魔改youtube" class="headerlink" title="Youtube +｜魔改youtube"></a>Youtube +｜魔改youtube</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/9932-youtube">YouTube +</a></li>
+</ul>
+<p>這腳本也猛猛的，把 Youtube 改造成我快不認識了 XD</p>
+<ul>
+<li>Play your videos in a pop-out window</li>
+<li>Turn off 60fps</li>
+<li>Navigate through videos frame by frame (No longer necessary, YouTube already has it)</li>
+<li>Allow ads only in videos from your subscribed channels</li>
+<li>Blacklist entire channels from your suggestions and search results</li>
+<li>Make the player fill the entire browser with the Fullbrowser mode feature</li>
+<li>Player always visible where you want while reading the comments</li>
+<li>Play your most recent subscriptions in a playlist</li>
+<li>Reverse any playlist</li>
+<li>Control any playlist autoplay</li>
+<li>Take video screenshots and save them</li>
+<li>View and save the video thumbnail like old times</li>
+<li>Bring back the total number of videos uploaded by the creator</li>
+<li>Use the relative video post time to know quickly how old the video is</li>
+<li>and many more!</li>
+</ul>
+<h2 id="Youtube-Best-Video-Downloader-2｜下載Youtube"><a href="#Youtube-Best-Video-Downloader-2｜下載Youtube" class="headerlink" title="Youtube Best Video Downloader 2｜下載Youtube"></a>Youtube Best Video Downloader 2｜下載Youtube</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/19592-youtube-best-video-downloader-2">Youtube Best Video Downloader 2</a></li>
+</ul>
+<p>顧名思義，這是可以下載 Youtube 影片的腳本</p>
+<h2 id="為什麼你們就是不能加個空格呢？｜中英之間加空格"><a href="#為什麼你們就是不能加個空格呢？｜中英之間加空格" class="headerlink" title="為什麼你們就是不能加個空格呢？｜中英之間加空格"></a>為什麼你們就是不能加個空格呢？｜中英之間加空格</h2><ul>
+<li>連結：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-TW/scripts/2185-%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E5%80%91%E5%B0%B1%E6%98%AF%E4%B8%8D%E8%83%BD%E5%8A%A0%E5%80%8B%E7%A9%BA%E6%A0%BC%E5%91%A2#">為什麼你們就是不能加個空格呢？</a></li>
+</ul>
+<p>這腳本也很厲害啊 ~ 能在中文和英文之間插入空白，提供文章的可讀性。之前裝過 Chrome 套件的版本，看到有腳本版的就開心的把之前的套件給移除了</p>
+<hr>
+<h1 id="自己寫的腳本"><a href="#自己寫的腳本" class="headerlink" title="自己寫的腳本"></a>自己寫的腳本</h1><p>還不穩定 orz</p>
+<h2 id="FB分享引文"><a href="#FB分享引文" class="headerlink" title="FB分享引文"></a>FB分享引文</h2><p>2016年04月左右，臉書出了一個功能：分享引文。只要在有開啟此功能的網頁中反白選取文字，就會跳出「分享到臉書」的按鈕。點擊按鈕，跳出來的分享視窗就會多引用了剛剛反白選取的文字。</p>
+<p>因為我很想讓自己分享的文章都能引用上面的文字，但又不是每個網頁都有此功能，我就自己想辦法自己土砲一下 js 語法。此功能的介紹可參考這裡</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://free.com.tw/facebook-quote-plugin/">Facebook Quote Plugin 臉書選取文字後自動跳出「分享引文」外掛功能設定教學</a></li>
+</ul>
+<p>簡單的說，就是在想開啟分享引文功能的網頁上，放上以下程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 程式碼一</span></span><br><span class="line">&lt;div id=<span class="string">&quot;fb-root&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;(<span class="function"><span class="keyword">function</span>(<span class="params">d, s, id</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> js, fjs = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">if</span> (d.getElementById(id)) <span class="keyword">return</span>;</span><br><span class="line">js = d.createElement(s); js.id = id;</span><br><span class="line">js.src = <span class="string">&quot;//connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v2.6&quot;</span>;</span><br><span class="line">fjs.parentNode.insertBefore(js, fjs);</span><br><span class="line">&#125;(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>, <span class="string">&#x27;facebook-jssdk&#x27;</span>));&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以及</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 程式碼二</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;fb-quote&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>參考這兩段 Facebook SDK 程式馬後，以下是我修改的能放到 TamperMonkey 的兩段語法。因為能力不足的關係，這兩個語法要拆開來使用比較適合，詳情在後文說明。</p>
+<h3 id="FB分享引文-fb-quote"><a href="#FB分享引文-fb-quote" class="headerlink" title="FB分享引文 fb-quote"></a>FB分享引文 fb-quote</h3><p>在有些網頁中，如果它已經安裝臉書的按讚分享工具的話，那可能也已經安裝 <code>程式碼一</code> 的片段了。如此，只要再添加 <code>程式碼二</code> 就好。<code>程式碼二</code> 的目的是在 html 中加入 <code>&lt;div class=&quot;fb-quote&quot;&gt;&lt;/div&gt;</code> 這個帶有 <code>fb-quote</code> class 的 div。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 程式碼三</span></span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         FB分享引文 fb-quote</span></span><br><span class="line"><span class="comment">// @namespace    https://ayugioh2003.github.io/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  try to take over the world!</span></span><br><span class="line"><span class="comment">// @include      *</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// @homepage     https://ayugioh2003.github.io/</span></span><br><span class="line"><span class="comment">// @author       ChiuCW</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"><span class="comment">// https://free.com.tw/facebook-quote-plugin/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newHTML = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="comment">// newHTML.innerHTML=&#x27;&lt;div class=&quot;fb-quote&quot;&gt;second&lt;/div&gt;&#x27;;</span></span><br><span class="line">newHTML.setAttribute(<span class="string">&quot;class&quot;</span>,<span class="string">&quot;fb-quote&quot;</span>);</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(newHTML);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="FB分享引文-fb-root"><a href="#FB分享引文-fb-root" class="headerlink" title="FB分享引文 fb-root"></a>FB分享引文 fb-root</h3><p>如果想分享引文的網頁沒有安裝 Facebook SDK 的話，就要載入 SDK 才行。添加以下腳本就能夠有分享引文的功能。但要注意的是，載入此腳本後，網頁會一直在 loading … 速度會變慢。但如果在網頁載入後馬上關掉此腳本的話，仍然能有分享引文的功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 程式碼四</span></span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         FB分享引文 fb-root</span></span><br><span class="line"><span class="comment">// @namespace    https://ayugioh2003.github.io/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  try to take over the world!</span></span><br><span class="line"><span class="comment">// @include      *</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// @homepage     https://ayugioh2003.github.io/</span></span><br><span class="line"><span class="comment">// @author       ChiwCW</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"><span class="comment">// https://free.com.tw/facebook-quote-plugin/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newHTML2 = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="comment">// newHTML2.innerHTML=&#x27;&lt;div class=&quot;fb-quote&quot;&gt;second&lt;/div&gt;&#x27;;</span></span><br><span class="line">newHTML2.setAttribute(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;fb-root&quot;</span>);</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(newHTML2);</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">d, s, id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> js, fjs = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (d.getElementById(id)) <span class="keyword">return</span>;</span><br><span class="line">  js = d.createElement(s);</span><br><span class="line">  js.id = id;</span><br><span class="line">  js.src = <span class="string">&quot;//connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v2.6&quot;</span>;</span><br><span class="line">  fjs.parentNode.insertBefore(js, fjs);</span><br><span class="line">&#125;(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>, <span class="string">&#x27;facebook-jssdk&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h1><ul>
+<li>暫無</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B4%E7%90%86/" rel="tag"># 整理</a>
+              <a href="/tags/TamperMonkey/" rel="tag"># TamperMonkey</a>
+              <a href="/tags/Chrome/" rel="tag"># Chrome</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/10/software-i-installed/" rel="prev" title="目前電腦上所安裝的程式">
+                  <i class="fa fa-chevron-left"></i> 目前電腦上所安裝的程式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/10/learn-javascript-online-resources/" rel="next" title="學習JavaScript的線上資源">
+                  學習JavaScript的線上資源 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2016/10/TamperMonkey-scripts-list/";
+    this.page.identifier = "2016/10/TamperMonkey-scripts-list/";
+    this.page.title = "目前安裝的 TamperMonkey 腳本";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="前言最近在學習網頁排版的時候，課程裡面使用 div 以及 float 來排版，而其實這種排版方式也還算是主流(吧)的一支。但我一直覺得這種排版方式有脫褲子放屁的感覺，很阿雜，因為需要清除浮動，才不會造成父元素的高度塌陷。(可能也有人這樣想吧，所以後來有了 flex 和 grid 排版方式 XD) 以下簡單介紹目前我知道的網頁佈局方式，之後再稍微談談 display: flow-root 這個比較新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="談網頁的佈局以及 display:flow-root">
+<meta property="og:url" content="https://ayugioh2003.github.io/2018/04/html-layout-and-flowroot/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="前言最近在學習網頁排版的時候，課程裡面使用 div 以及 float 來排版，而其實這種排版方式也還算是主流(吧)的一支。但我一直覺得這種排版方式有脫褲子放屁的感覺，很阿雜，因為需要清除浮動，才不會造成父元素的高度塌陷。(可能也有人這樣想吧，所以後來有了 flex 和 grid 排版方式 XD) 以下簡單介紹目前我知道的網頁佈局方式，之後再稍微談談 display: flow-root 這個比較新">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-04-10T12:17:12.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.504Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="frontend, vue, psychology">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2018/04/html-layout-and-flowroot/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>談網頁的佈局以及 display:flow-root | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B6%B2%E9%A0%81%E4%BD%88%E5%B1%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">一、網頁佈局方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-table-%E4%BD%88%E5%B1%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 table 佈局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-div-%E4%BD%88%E5%B1%80"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 div 佈局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-ClearFix"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 ClearFix</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-flex-%E4%BD%88%E5%B1%80"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 flex 佈局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-gird-%E4%BD%88%E5%B1%80"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 gird 佈局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%96%89%E5%90%88%E6%B5%AE%E5%8B%95%E8%88%87-display-flow-root"><span class="nav-number">3.</span> <span class="nav-text">二、閉合浮動與 display: flow-root</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-display-flow-root"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 display: flow-root</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2018/04/html-layout-and-flowroot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          談網頁的佈局以及 display:flow-root<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2018-04-10-html-layout-and-flowroot.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2018-04-10 12:17:12" itemprop="dateCreated datePublished" datetime="2018-04-10T12:17:12+00:00">2018-04-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">編程</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2018/04/html-layout-and-flowroot/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/html-layout-and-flowroot/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在學習網頁排版的時候，課程裡面使用 div 以及 float 來排版，而其實這種排版方式也還算是主流(吧)的一支。但我一直覺得這種排版方式有脫褲子放屁的感覺，很阿雜，因為需要清除浮動，才不會造成父元素的高度塌陷。(可能也有人這樣想吧，所以後來有了 flex 和 grid 排版方式 XD)</p>
+<p>以下簡單介紹目前我知道的網頁佈局方式，之後再稍微談談 <code>display: flow-root</code> 這個比較新的東西</p>
+<span id="more"></span>
+
+<h2 id="一、網頁佈局方式"><a href="#一、網頁佈局方式" class="headerlink" title="一、網頁佈局方式"></a>一、網頁佈局方式</h2><p>我還記得大三的時候，跑去香妝系修網頁設計。當時使用的編輯器是 DreamWeaver，使用的佈局就是 table 了。害我後聽到 div 佈局的時候，花了很長一段時間去了解。但說實在的，我覺得 table 佈局比 div 佈局直覺多了。</p>
+<p>就我的理解中，目前比較常被使用過的網頁佈局典範有這些</p>
+<ul>
+<li>table 佈局</li>
+<li>div 佈局<ul>
+<li>flow-root 佈局(等等會提到)</li>
+</ul>
+</li>
+<li>flex 佈局</li>
+<li>grid 佈局</li>
+</ul>
+<p>這些佈局典範，基本上都和 html 的元素屬性 display 有關。</p>
+<p>在 w3.org 在 <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css3-box/#block-level0">CSS basic box model</a> 公佈的資料裡，有提到很多 display 的屬性。display 好像就翻譯叫佈局吧？但為了不讓它跟 與視覺效果的網頁佈局 搞混，下文就沿用英文 display 指這個屬性。</p>
+<h3 id="1-1-table-佈局"><a href="#1-1-table-佈局" class="headerlink" title="1.1 table 佈局"></a>1.1 table 佈局</h3><p>table 佈局，可以透過 html 的 table 元素、或是把 <code>&lt;div&gt;</code> 設定成 <code>display: table</code> 達成。我的理解是，這種佈局就像是在 word 裡面拉表格的樣子差不多。拉完表格、固定好細格的位置後，只要把資料放入細格，在螢幕看到的畫面就是實際呈現的畫面(好繞口)。</p>
+<p>但因為 table 無法方便的 RWD、table 有預設樣式對 css 不太友善的關係，後來網路佈局的主流就換成了 div 佈局。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">　<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">　<span class="tag">&lt;<span class="name">td</span>&gt;</span> 第一欄 <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">td</span>&gt;</span> 第二欄 <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">td</span>&gt;</span> 第三欄 <span class="tag">&lt;/<span class="name">td</span>&gt;</span> </span><br><span class="line">　<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-div-佈局"><a href="#1-2-div-佈局" class="headerlink" title="1.2 div 佈局"></a>1.2 div 佈局</h3><p>div 佈局，就是用 div 來堆疊網頁上內容的一種佈局方式。因為 div 這個元素沒有什麼對視覺有干擾的預設樣式，就像是空白的容器一樣，所以很適合 <s>拿來蓋房子</s> 用來區隔性質不同的網頁內容。再加上 div 有 <code>display: block</code> 的預設值，而 block 元素可以包裹 block 與 inline 元素，所以比起 span 更適合拿來當磚塊來蓋房子了。</p>
+<p>但，div 佈局有個問題是，需要清除浮動。不管是在 block 或是 inline 元素中，在預設的情況下，他們的子元素都會依照 normal flow 的方式，由左至右、由上而下的乖乖排隊。但因為 block 父元素可以包裹 block 子元素，而 block 具有佔據一行的特性，所以 block 子元素雖然一樣會由上往下乖乖排隊，但卻沒辦法有左右鄰居。為了讓 block 子元素有能跟其他元素並排，於是有人想到 <code>float</code> 屬性。</p>
+<p><code>float</code> 屬性，就相當於 word 裡面的文繞圖功能。當我設定圖片有 <code>float: left</code> 屬性時，圖片就會貼在 block 父元素的左側，而父元素之下的其他文字就會依照著 normal flow，貼著圖片依序排序去。因此，div 子元素可以有鄰居了！而且這些飄在 normal flow 之上的浮動 div 子元素，彼此也是可以當鄰居的。</p>
+<p>但，好景不常，有一好沒兩好。這些浮起來的 div 子元素，因為沒有人拉它們回來，於是時常飄著飄著，就飄出父元素的視覺範圍了。這個現象叫做父元素的高度塌陷，height collapsing (還是叫 margin collapsing?)。為了解決這個現象，於是很多人開始討論該如何「清除浮動」，也就是 clearfix。</p>
+<h4 id="1-2-1-ClearFix"><a href="#1-2-1-ClearFix" class="headerlink" title="1.2.1 ClearFix"></a>1.2.1 ClearFix</h4><p data-height="265" data-theme-id="0" data-slug-hash="xWMgee" data-default-tab="result" data-user="ayugioh2003" data-embed-version="2" data-pen-title="height collapsing" class="codepen">See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/xWMgee/">height collapsing</a> by Chiu (<a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003">@ayugioh2003</a>) on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>橘色的 div 是藍色和紅色 div 的父元素，本來應該是要將它們包起來的。但因為紅色藍色 div 有 <code>float: left</code> 的屬性，所以脫離了 normal flow。橘色 div 的高度本來是由它的最高的子元素所決定，但因為紅藍 div 離家出走了，所以橘色 div 的高度就沒辦法像自己的小孩那麼高（有種心酸的感覺）。</p>
+<p>為了讓橘色 div 能包住紅藍 div 子元素，就需要「清除浮動」了。簡單的理解是，在紅色 div 後頭擺上一個不會逃家的小孩，這樣橘色 div 就可以抓到所有小孩了(咦)。</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="oqmZgg" data-default-tab="css,result" data-user="ayugioh2003" data-embed-version="2" data-pen-title=".clearfix" class="codepen">See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003/pen/oqmZgg/">.clearfix</a> by Chiu (<a target="_blank" rel="noopener" href="https://codepen.io/ayugioh2003">@ayugioh2003</a>) on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>簡單的說明</p>
+<ul>
+<li><code>.content:after</code> 是一種偽元素，能在橘色 div 後面產生一個虛的元素，並設定 css 屬性</li>
+<li>要讓 <code>.content:after</code> 出現在網頁上，必須要針對 <code>content</code> 屬性設定值。就算是空白也沒關係。因為我們只是想讓紅色 div 子元素後還有個子元素，能用來清除浮動，於是 <code>content</code> 只要空白就好</li>
+<li>這部份我沒有理解得很清楚。偽元素預設是 <code>display: inline</code>，為了讓它有自己的高度，需要設定成 <code>display: block</code> 或是 <code>display: table</code></li>
+<li>最後就是讓它背負「清除浮動」的任務啦 <code>clear: both</code></li>
+</ul>
+<p>以上就是我對 div 排版的大概理解。在 <a target="_blank" rel="noopener" href="http://www.iyunlu.com/view/css-xhtml/55.html">那些年我們一起清除過的浮動</a> 這篇文章中，有提到更多「清除浮動」的方式，他甚至認為「清除浮動」的原理主要可分成兩類</p>
+<ul>
+<li>其一，通過在浮動元素的末尾添加一個空元素，設置 clear：both 屬性，after 僞元素其實也是通過 content 在元素的後面生成了内容爲一個點的塊級元素</li>
+<li>其二，通過設置父元素 overflow 或者 display：table 屬性來閉合浮動</li>
+</ul>
+<p>此外，在 2017 年，chrome 和 firefox 支援了一個新的 display 屬性：<code>flow-root</code>，也能達成類似 clearfix 的效果。這個方法和上文提到的第二種原理有相關。待會會在後面說明。</p>
+<p>(另外，div 也有用 <code>display: inline-block</code> 排版方式，但 inline-block 有一些特別的 <s>feature</s> bug，所以還是不少人寧願用 block 搭配 float 來排版)</p>
+<h3 id="1-3-flex-佈局"><a href="#1-3-flex-佈局" class="headerlink" title="1.3 flex 佈局"></a>1.3 flex 佈局</h3><p>還沒學，稍微看過教學，覺得厲害。聽說跟 div 佈局概念比較接近</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3cplus.com/css/css-grids-flexbox-and-box-alignment-our-new-system-for-web-layout.html">Web 布局新系統：CSS Grid,Flexbox 和 Box Alignment_CSS3, CSS3 Grid Layout, Grid, Layout 教程_w3cplus</a></li>
+</ul>
+<h3 id="1-4-gird-佈局"><a href="#1-4-gird-佈局" class="headerlink" title="1.4 gird 佈局"></a>1.4 gird 佈局</h3><p>還沒學，覺得厲害。聽說跟 table 佈局概念比較接近</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3cplus.com/css/css-grids-flexbox-and-box-alignment-our-new-system-for-web-layout.html">Web 布局新系統：CSS Grid,Flexbox 和 Box Alignment_CSS3, CSS3 Grid Layout, Grid, Layout 教程_w3cplus</a></li>
+</ul>
+<hr>
+<h2 id="二、閉合浮動與-display-flow-root"><a href="#二、閉合浮動與-display-flow-root" class="headerlink" title="二、閉合浮動與 display: flow-root"></a>二、閉合浮動與 display: flow-root</h2><p>在 <a target="_blank" rel="noopener" href="http://www.iyunlu.com/view/css-xhtml/55.html">那些年我們一起清除過的浮動</a>作者提到，其實「清除浮動」的說法並不是很精準，我們要的其實不只是「清除浮動」，而是要讓父元素高度不會塌陷，不會影響到父元素的後面鄰居。因此以「閉合浮動」的說法會比較精確。原理二就是使用閉合浮動的概念。</p>
+<p>那如何達到閉合浮動，以及它是什麼原理呢？該文提到，在 CSS2.1 規範中，有一個新的概念，叫 BFC ( <a target="_blank" rel="noopener" href="https://www.w3.org/TR/CSS21/visuren.html#block-formatting">Block formatting contexts，塊級格式化上下文</a>)。</p>
+<p>我們可以把 BFC 想像成是一個控制欲很強的父元素。BFC 的小孩元素，永遠只能待在這個家的空間裡面，無法接觸到 BFC 之外的元素。因此，就能達到類似清除浮動的效果，但它其實是閉合浮動。</p>
+<p>在比較久之前，只有符合特殊條件的元素，才能成為 BNC 這個比較特別的 block (inline-block)。在 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html">前端精選文摘：BFC 神奇背後的原理</a> 一文提到的條件有</p>
+<ul>
+<li>根元素</li>
+<li>float 屬性不爲 none</li>
+<li>position 爲 absolute 或 fixed</li>
+<li>display 爲 inline-block, table-cell, </li>
+<li>table-caption, flex, inline-flex</li>
+<li>overflow 不爲 visible</li>
+</ul>
+<p>所以符合這些條件的父元素，就算沒有清除浮動，本身也自帶了閉合浮動的特殊效果，這個父元素的高度也就不會塌陷了。</p>
+<p>有些 clearfix 的方案，會設定父元素 <code>overflow: hidden</code>，就是把父元素轉換成了 BNC，讓子元素只能乖乖待在家裡，無法逃出父元素的框框(聽起來好悲哀)。</p>
+<h3 id="2-1-display-flow-root"><a href="#2-1-display-flow-root" class="headerlink" title="2.1 display: flow-root"></a>2.1 display: flow-root</h3><p><code>flow-root</code> 就像是 <code>block</code>、<code>inline</code>這些值一樣，是 <code>display</code> 屬性可以選擇的值。作用就是，能直接把被設定成 <code>display: flow-root</code> 的元素，直接轉變成 BNF 喔！這樣應該能套用在父元素上，閉合浮動，避免父元素的高度塌陷了。</p>
+<p><code>flow-root</code> 是在 css3 中才被加入的，好像很長一段時間都沒被實作過。但在 2017 年四月釋出的 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2017/04/nic58">Chrome 58</a> 和 <a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2017/04/firefox-53-quantum-compositor-compact-themes-css-masks-and-more/">Firefox 53</a> 都相繼支援 <code>flow-root</code> 功能啦 ~ 不過根據 <a target="_blank" rel="noopener" href="https://caniuse.com/#search=flow-root">can i use</a>，到 2018 年的今天，好像也只有 Chrome 和 Firefox 有支援而已。</p>
+<p>總之就是，要閉合浮動的話，只要在父元素設定 <code>display: flow-root</code> 就好了。而還沒支援的瀏覽器上，可以使用 <code>@supports</code>，拿舊的 clearfix 方案出來檔</p>
+<p>demo1</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.left</span>,</span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.wrapper</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@supports</span> (<span class="attribute">display</span>: flow-root) &#123;</span><br><span class="line">    <span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: flow-root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.wrapper</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: none;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>demo2</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flow-root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@supports</span> <span class="keyword">not</span> (<span class="attribute">display</span>: flow-root) &#123;</span><br><span class="line">    <span class="selector-class">.wrapper</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="attribute">display</span>: block;</span><br><span class="line">        <span class="attribute">clear</span>: both;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附上 flow-root 的參考資料</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://unwire.pro/2017/04/29/css-display-flow-root/marketing/">解決 float:left 走樣問題更簡單　使用 CSS 新屬性 display: flow-root - UNWIRE.PRO</a></li>
+<li><a target="_blank" rel="noopener" href="https://helloanselm.com/2017/flow-root-supports/">Using flow-root today – Anselm Hannemann</a></li>
+<li><a target="_blank" rel="noopener" href="https://div.io/topic/1973">css 技巧之：css 新屬性 display:flow-root 介紹。 - Div.IO</a></li>
+</ul>
+<hr>
+<p>以上是我的整理</p>
+<p>因能力有限有誤或不清楚的地方，請多多指教與指正 orz</p>
+<p>(像 Margin collapsing 和 height collapsing 我就分不太清楚差別；好像沒有後面用法的樣子)</p>
+<p>附上主要參考資料</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.iyunlu.com/view/css-xhtml/55.html">那些年我們一起清除過的浮動 - 層疊之美</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3cplus.com/css3/display-flow-root.html">flow-root_flow-root 教程_w3cplus</a></li>
+<li><a target="_blank" rel="noopener" href="http://cssmojo.com/the-very-latest-clearfix-reloaded/">The very latest clearfix reloaded</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/live-in-browser-browsersync/" rel="prev" title="使用 browsersync 讓網頁能在瀏覽器中即時預覽">
+                  <i class="fa fa-chevron-left"></i> 使用 browsersync 讓網頁能在瀏覽器中即時預覽
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/howhow-universe-webpage-demo/" rel="next" title="How 哥宇宙宣傳網頁試作">
+                  How 哥宇宙宣傳網頁試作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2018/04/html-layout-and-flowroot/";
+    this.page.identifier = "2018/04/html-layout-and-flowroot/";
+    this.page.title = "談網頁的佈局以及 display:flow-root";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

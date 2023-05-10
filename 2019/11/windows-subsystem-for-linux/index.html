@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="因為今天是接案的暫時空閒日子，就把時間拿來研究之前沒搞得很懂的 Windows Sub Linux 惹。以下先列出自己的嘗試步驟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新嘗試 win 底下的 SubLinux 環境">
+<meta property="og:url" content="https://ayugioh2003.github.io/2019/11/windows-subsystem-for-linux/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="因為今天是接案的暫時空閒日子，就把時間拿來研究之前沒搞得很懂的 Windows Sub Linux 惹。以下先列出自己的嘗試步驟">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-11-25T01:01:52.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.504Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="wsl">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2019/11/windows-subsystem-for-linux/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>重新嘗試 win 底下的 SubLinux 環境 | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A7%BB%E9%99%A4%E8%88%8A%E7%9A%84-legacy-%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">一、移除舊的 legacy 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%9D-ubuntu-18-%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">二、安裝 ubuntu 18 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%9B%B4%E6%96%B0-apt"><span class="nav-number">3.</span> <span class="nav-text">三、更新 apt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%9D-nvm"><span class="nav-number">4.</span> <span class="nav-text">四、安裝 nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Linux-%E8%B7%91-VSCode"><span class="nav-number">5.</span> <span class="nav-text">在 Linux 跑 VSCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh-oh-my-zsh"><span class="nav-number">6.</span> <span class="nav-text">zsh, oh my zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%8B%E5%BE%8C%E8%80%83%E6%85%AE%E7%A0%94%E7%A9%B6"><span class="nav-number">7.</span> <span class="nav-text">之後考慮研究</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2019/11/windows-subsystem-for-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          重新嘗試 win 底下的 SubLinux 環境<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2019-11-25-windows-subsystem-for-linux.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-11-25 01:01:52" itemprop="dateCreated datePublished" datetime="2019-11-25T01:01:52+00:00">2019-11-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/11/windows-subsystem-for-linux/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/windows-subsystem-for-linux/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>因為今天是接案的暫時空閒日子，就把時間拿來研究之前沒搞得很懂的 Windows Sub Linux 惹。以下先列出自己的嘗試步驟</p>
+<span id="more"></span>
+
+<h2 id="一、移除舊的-legacy-版本"><a href="#一、移除舊的-legacy-版本" class="headerlink" title="一、移除舊的 legacy 版本"></a>一、移除舊的 legacy 版本</h2><p>好像去年還前年時，為了嚐鮮，有先用了 beta 版本 wsl，所以要先移除掉</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Legacy</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-tw/windows/wsl/install-legacy">安裝或移除 Windows 10 年度更新版或建立者更新 | Microsoft Docs</a></li>
+</ul>
+<h2 id="二、安裝-ubuntu-18-版本"><a href="#二、安裝-ubuntu-18-版本" class="headerlink" title="二、安裝 ubuntu 18 版本"></a>二、安裝 ubuntu 18 版本</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2019/02/01/Useful-tool-WSL-Windows-Subsystem-for-Linux">介紹好用工具：WSL (Windows Subsystem for Linux) | The Will Will Web</a></li>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/@tf-z1zFMTIC8ADhxEcGJEA/BJByCIUHf">Windows Subsystem for Linux (WSL) 環境設定 - HackMD</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=av0UQy6g2FA">Windows Subsystem for Linux (WSL) Tutorial &amp; How To - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Cvrqmq9A3tA">Windows 10 Bash &amp; Linux Subsystem Setup - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://blogs.msdn.microsoft.com/microsoft_student_partners_in_taiwan/2017/10/03/wsltune/">【WSL】Windows Subsystem for Linux 安裝及基本配置！ – 台灣微軟學生大使</a></li>
+</ul>
+<h2 id="三、更新-apt"><a href="#三、更新-apt" class="headerlink" title="三、更新 apt"></a>三、更新 apt</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+<p>本來安裝完 ubuntu 後，想直接安裝 nodejs，結果一直跳出錯誤訊息 <code>unable to locate package nodejs</code> orz。後來 google 後，有人說要先更新 apt 這個 linux 世界用來下載套件用的方便工具（對應到 win 世界，相當於 chocolatey）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://superuser.com/questions/1359633/apt-get-install-is-not-working-in-wsl/1359995">ubuntu - apt-get install is not working in WSL - Super User</a></li>
+<li><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/759678/bash-on-windows-10-doesnt-locate-any-package">apt - Bash (on Windows 10) doesn’t locate any package - Ask Ubuntu</a></li>
+</ul>
+<h2 id="四、安裝-nvm"><a href="#四、安裝-nvm" class="headerlink" title="四、安裝 nvm"></a>四、安裝 nvm</h2><p>本來想直接安裝 nodejs，後來想說沒用過 nodejs 版本切換工具，所以就跑去下載 nvm 惹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</span><br><span class="line"></span><br><span class="line">nvm install 12.13.1 <span class="comment">#目前 node 穩定版本</span></span><br><span class="line">nvm list <span class="comment">#列出已安裝版本</span></span><br><span class="line">nvm use 版本號 <span class="comment">#切換版本</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://noob.tw/nvm/">nvm：快速安裝、切換不同版本的 Node.js</a></li>
+<li><a target="_blank" rel="noopener" href="https://oranwind.org/nvm-windows/">[Node.JS] 在 Windows 下使用 nvm 切換 Node 版本</a></li>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a></li>
+</ul>
+<h2 id="在-Linux-跑-VSCode"><a href="#在-Linux-跑-VSCode" class="headerlink" title="在 Linux 跑 VSCode"></a>在 Linux 跑 VSCode</h2><p>無聊在 terminal 敲了 <code>code .</code> 指令，這在 cmd 中會直接呼叫出 VSCode，並以目前路徑開啟。沒想到，在 wsl 中敲 <code>code .</code>，竟然跳出提示 <code>Installing VS Code Server</code> @@。後來研究後，好像是在 wsl 開啟一個 sever，讓 server 跟 win 溝通資料，這樣就能使用到 win 中的 VSCode 了。真是黑科技 R</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://code.visualstudio.com/remote-tutorials/wsl/run-in-wsl">Run Visual Studio Code in Windows Subsystem for Linux</a></li>
+</ul>
+<h2 id="zsh-oh-my-zsh"><a href="#zsh-oh-my-zsh" class="headerlink" title="zsh, oh my zsh"></a>zsh, oh my zsh</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/@tf-z1zFMTIC8ADhxEcGJEA/BJByCIUHf">Windows Subsystem for Linux (WSL) 環境設定 - HackMD</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/hungys-blog/windows-subsystem-for-linux-configuration-caf2f47d0dfb">Windows Subsystem for Linux 環境配置 (最新 1709 版) - Hungys.blog() - Medium</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.gtwang.org/linux/linux-chsh-command-change-login-shell-tutorial/">Linux 查詢與更改登入 shell 設定，chsh 指令用法教學與範例 - G. T. Wang</a></li>
+</ul>
+<hr>
+<h2 id="之後考慮研究"><a href="#之後考慮研究" class="headerlink" title="之後考慮研究"></a>之後考慮研究</h2><p>Linux 桌面系統，直接在 windows 玩 Ubuntu GUI 界面</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://rocksaying.tw/archives/2018/wsl-run-linux-desktop-software.html">Windows Subsystem for Linux (WSL) 使用 Linux 桌面軟體與中文字型 - 石頭閒語</a></li>
+</ul>
+<p>中文輸入</p>
+<ul>
+<li>目前無法輸入。issue 說已經修復好，但還沒在 window store 上架，可能要再等等吧</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/terminal/issues/2459">Version: 0.3.2171.0无法使用中文输入法 · Issue #2459 · microsoft/terminal</a></li>
+</ul>
+<p>查看其他語系的評論</p>
+<ul>
+<li>在網頁版查看</li>
+<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:reviewstab">Get Windows Terminal (Preview) - Microsoft Store</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/wsl/" rel="tag"># wsl</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/09/hexschool-homecoming-three-years-2019/" rel="prev" title="六角三週年同學會參與心得">
+                  <i class="fa fa-chevron-left"></i> 六角三週年同學會參與心得
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/ithelp-ironman-2020-award/" rel="next" title="IT邦幫忙鐵人賽第11屆頒獎典禮心得">
+                  IT邦幫忙鐵人賽第11屆頒獎典禮心得 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2019/11/windows-subsystem-for-linux/";
+    this.page.identifier = "2019/11/windows-subsystem-for-linux/";
+    this.page.title = "重新嘗試 win 底下的 SubLinux 環境";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

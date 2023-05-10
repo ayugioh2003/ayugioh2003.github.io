@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ayugioh2003.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="前言因為剛好六角有徵文活動，想說順便整理一下這陣子以來接案的開發流程與心得。 目前參與過的專案我從 2019 年的 10 月左右開始接案，到目前為止經手過三個案子。第一個案子是幫國外公司建立形象官網(從頭到尾參與)、第二個案子是幫一個國內公司後台畫面切板(只參與前半部)、第三個案子則是進行到一半的案子，在既有架構上幫忙增加新頁面或功能(從中間開始參與)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端接案開發流程與心得 2019-2021">
+<meta property="og:url" content="https://ayugioh2003.github.io/2021/03/frontend-case-2019-to-2021/index.html">
+<meta property="og:site_name" content="小麥前端 blog">
+<meta property="og:description" content="前言因為剛好六角有徵文活動，想說順便整理一下這陣子以來接案的開發流程與心得。 目前參與過的專案我從 2019 年的 10 月左右開始接案，到目前為止經手過三個案子。第一個案子是幫國外公司建立形象官網(從頭到尾參與)、第二個案子是幫一個國內公司後台畫面切板(只參與前半部)、第三個案子則是進行到一半的案子，在既有架構上幫忙增加新頁面或功能(從中間開始參與)。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-03-31T21:05:45.000Z">
+<meta property="article:modified_time" content="2023-05-10T18:39:18.508Z">
+<meta property="article:author" content="小麥">
+<meta property="article:tag" content="frontend, vue, psychology">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ayugioh2003.github.io/2021/03/frontend-case-2019-to-2021/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script data-ad-client="ca-pub-2692710699645135" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<title>前端接案開發流程與心得 2019-2021 | 小麥前端 blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">小麥前端 blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一個心理人跑來學前端的記錄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E5%8F%83%E8%88%87%E9%81%8E%E7%9A%84%E5%B0%88%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">目前參與過的專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%80%8B%E6%A1%88%E5%AD%90-2019-08-2020-01"><span class="nav-number">2.1.</span> <span class="nav-text">第一個案子 2019.08-2020.01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%80%8B%E6%A1%88%E5%AD%90-2020-08-2020-10"><span class="nav-number">2.2.</span> <span class="nav-text">第二個案子 2020.08-2020-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%80%8B%E6%A1%88%E5%AD%90-2020-01-2021"><span class="nav-number">2.3.</span> <span class="nav-text">第三個案子 2020.01-2021.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%95%B4%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">工作流程整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E6%A7%8B%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">建構前端開發環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E5%95%9F%E5%8B%95%E5%88%9D%E6%9C%9F-%E5%89%9B%E9%80%B2%E5%85%A5%E5%B0%88%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">專案啟動初期&#x2F;剛進入專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E7%99%BC%E4%B8%AD"><span class="nav-number">3.3.</span> <span class="nav-text">開發中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%A1%88"><span class="nav-number">3.4.</span> <span class="nav-text">結案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小麥"
+      src="/images/chiu.jpg">
+  <p class="site-author-name" itemprop="name">小麥</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle ad-sidebar"
+    style="display:block"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="2218215400"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    
+    if (location.pathname === '/') {
+        (adsbygoogle = window.adsbygoogle || []).push({});    
+    } else {
+        document.querySelector('.ad-sidebar').remove()
+    }
+    
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://ayugioh2003.github.io/2021/03/frontend-case-2019-to-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/chiu.jpg">
+      <meta itemprop="name" content="小麥">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小麥前端 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端接案開發流程與心得 2019-2021<a href="https://github.com/ayugioh2003/ayugioh2003-hexo5/tree/main/source/_posts/2021-03-31-frontend-case-2019-to-2021.md" class="post-edit-link" title="編輯" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-03-31 21:05:45" itemprop="dateCreated datePublished" datetime="2021-03-31T21:05:45+00:00">2021-03-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2023-05-10 18:39:18" itemprop="dateModified" datetime="2023-05-10T18:39:18+00:00">2023-05-10</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/frontend-case-2019-to-2021/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/frontend-case-2019-to-2021/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>因為剛好六角有徵文活動，想說順便整理一下這陣子以來接案的開發流程與心得。</p>
+<h2 id="目前參與過的專案"><a href="#目前參與過的專案" class="headerlink" title="目前參與過的專案"></a>目前參與過的專案</h2><p>我從 2019 年的 10 月左右開始接案，到目前為止經手過三個案子。第一個案子是幫國外公司建立形象官網(從頭到尾參與)、第二個案子是幫一個國內公司後台畫面切板(只參與前半部)、第三個案子則是進行到一半的案子，在既有架構上幫忙增加新頁面或功能(從中間開始參與)。</p>
+<span id="more"></span>
+
+<h3 id="第一個案子-2019-08-2020-01"><a href="#第一個案子-2019-08-2020-01" class="headerlink" title="第一個案子 2019.08-2020.01"></a>第一個案子 2019.08-2020.01</h3><p>第一個案子是幫國外公司建立形象官網，開發團隊這端有前端工程師(我)，Roy(身兼PM、後端工程師、後台的前端工程師 XD)、以及當時我家裡有事情來幫忙救火的 Ray。我負責前台部份的切板與動畫效果，大概有十幾頁。</p>
+<p>當時前端部份，我選用的技術如下：</p>
+<ul>
+<li>gulp (自動化建構)</li>
+<li>EJS (能複用 HTML 片段)</li>
+<li>SCSS (方便處理 CSS)</li>
+<li>BootStrap (有現成的元件、Utilities)</li>
+<li>Vue (讓資料與畫面關注點分離，方便開發)</li>
+<li>webpack (當時用來處理 JS 的 module)</li>
+</ul>
+<p>當時結案後，有寫過心得文</p>
+<ul>
+<li><a href="https://ayugioh2003.github.io/2020/02/first-frontend-case/">第一次前端接案打王(被王打)的心得 | 小麥前端 blog</a></li>
+</ul>
+<h3 id="第二個案子-2020-08-2020-10"><a href="#第二個案子-2020-08-2020-10" class="headerlink" title="第二個案子 2020.08-2020-10"></a>第二個案子 2020.08-2020-10</h3><p>第二個案子是幫國內公司建立官方網站，這裡我負責後台的 ERP 網站切板。</p>
+<p>當時前端部份，我選用的技術如下：</p>
+<ul>
+<li>Vue Cli (因為後台不須處理 SEO，SPA 就夠用了)</li>
+<li>Express (因為會需要佈署到雲端，所以簡單起個 server)</li>
+<li>vuetify (因為設計稿偏向 material 設計，我比較目前現有的 CSS/vue元件 框架後，決定採用 vuetify)</li>
+</ul>
+<p>因為以切板為主，沒用到太多的技術工具。不過需要刻出許多能複用的 vue 元件，vue 的語法倒是練習到不少。</p>
+<h3 id="第三個案子-2020-01-2021"><a href="#第三個案子-2020-01-2021" class="headerlink" title="第三個案子 2020.01-2021."></a>第三個案子 2020.01-2021.</h3><p>第三個案子，我進去時已經開發到一半了，不是從頭開始。同時有數個網站，有前台也有後台部份。我主要是幫忙在既有基礎上添加新畫面、串接功能，或是修復 bug。</p>
+<p>當時前端部份，有使用的技術有：</p>
+<ul>
+<li>vue (因為網站不太需要 SEO，因此用 vue 開發)</li>
+<li>ant design vue (一種 vue UI 元件庫)</li>
+<li>vuetify (一種 vue UI 元件庫)</li>
+<li>vuex-map-fields (特別寫出來，能方便 vuex 操作)</li>
+<li>electron-vue (這案子有桌面應用需求)</li>
+</ul>
+<h2 id="工作流程整理"><a href="#工作流程整理" class="headerlink" title="工作流程整理"></a>工作流程整理</h2><p>因為進行了三個案子，中間又剛好買了新筆電需要重建開發環境，對於前端開發的工作流程有了一些底。以下是我的一些整理</p>
+<h3 id="建構前端開發環境"><a href="#建構前端開發環境" class="headerlink" title="建構前端開發環境"></a>建構前端開發環境</h3><p>為了在專案中能舒舒服服的進行開發，有完善的開發環境是必須的。以下是我個人的開發環境</p>
+<ul>
+<li>作業系統 windows：硬體 CP 值高。但 MB 最近的 M1 晶片聽說很香，之後會考慮</li>
+<li>Windows Terminal：比 cmd 好看，能客製化樣式，有支援 git 狀態，讚讚</li>
+<li>軟體包管理器 chocolatey：方便我安裝一些軟體工具)</li>
+<li>版本控制 git：方便協作開發</li>
+<li>nodejs 與 npm：用來裝前端相關的套件</li>
+<li>編輯器 vscode：除了開源，還有豐富的套件生態系</li>
+<li>瀏覽器 Chrome：現代化的瀏覽器，方便測試現代化前端技術寫出來的網頁。內建 dev tools、以及能安裝 vue tools 方便測試</li>
+</ul>
+<h3 id="專案啟動初期-剛進入專案"><a href="#專案啟動初期-剛進入專案" class="headerlink" title="專案啟動初期/剛進入專案"></a>專案啟動初期/剛進入專案</h3><p>當進入到專案後，我習慣會自己開個文件，記錄專案開始與專案結束期間的各種事情。例如：</p>
+<ul>
+<li>記錄專案名稱、專案目的、專案範圍、開發團隊人員：讓自己對這個專案的規模有個底</li>
+<li>整理使用技術、專案可參考資源、設計稿、API 文件：方便自己開發，不用到處找</li>
+</ul>
+<p>之前我是用 hackmd 記錄，現在比較偏好使用 notion。</p>
+<h3 id="開發中"><a href="#開發中" class="headerlink" title="開發中"></a>開發中</h3><p>在開發中，我習慣再開一份文件寫自己遇到的技術與解決方案。雖然遇到很多 bug 或技術難題時會想撞牆，但能解決的話，就會內化成自己的養分。</p>
+<p>除了在前端的難題外，也會遇到流程上、畫面上，或是 API 串接上的問題；這時就會需要請教 PM、後端，或是其他前端。像在第三個專案，算是我第一次需要與其他人頻繁協作，這時我就養成詢問前，先自己測試過一遍，之後附上說明文字，像是操作情境、所在頁面、操作流程，最後附上截圖或是影片，方便對方理解。必要時也會用電話聯絡的方式來加速溝通理解過程。</p>
+<h3 id="結案"><a href="#結案" class="headerlink" title="結案"></a>結案</h3><p>寫個心得/檢討文記錄一下，像是這篇心得文</p>
+<ul>
+<li><a href="https://ayugioh2003.github.io/2020/02/first-frontend-case/">第一次前端接案打王(被王打)的心得 | 小麥前端 blog</a></li>
+</ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>這次整理文寫得比較簡略，也算是幫自己做一個回顧。</p>
+<p>BTW，話說我 hexo 也好久沒用了，剛剛才發現我 github 上沒有最新的備份，最新的文章還留在快壞掉的舊筆電上 orz。趁著還能開機時趕快備份出來 XD</p>
+<hr>
+<p>此文參與 <a target="_blank" rel="noopener" href="https://www.hexschool.com/">六角學院</a> 的 <a target="_blank" rel="noopener" href="https://www.hexschool.com/2021/03/08/2021-03-08-ox-year-call-for-papers/">哞職順利｜徵文活動</a>。</p>
+<p>若有在<a target="_blank" rel="noopener" href="https://www.facebook.com/groups/110635703123103">六角學院的學員臉書社團</a>中，也可以瞧瞧其他人的<a target="_blank" rel="noopener" href="https://www.facebook.com/groups/110635703123103/permalink/887938915392774/">投稿文</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+<div style="height: 10px;"></div>
+
+<!-- d -->
+<ins class="adsbygoogle"
+    style="display:block;"
+    data-ad-client="ca-pub-2692710699645135"
+    data-ad-slot="5035950430"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+
+<script>
+    window.addEventListener('load', function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+</script>
+
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/about-big-five-personality-traits/" rel="prev" title="關於心理測驗〈五大性格特質〉">
+                  <i class="fa fa-chevron-left"></i> 關於心理測驗〈五大性格特質〉
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/frontend-interview-perparation-2021/" rel="next" title="前端面試準備 2021">
+                  前端面試準備 2021 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小麥</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://githubccw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://ayugioh2003.github.io/2021/03/frontend-case-2019-to-2021/";
+    this.page.identifier = "2021/03/frontend-case-2019-to-2021/";
+    this.page.title = "前端接案開發流程與心得 2019-2021";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://githubccw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
